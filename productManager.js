@@ -52,4 +52,5 @@ productos.addProduct({
     stock: "15"
 })
 
-console.log(productos.getProducts())
+console.log("todos",productos.getProducts())
+console.log("por id",productos.getProductById())
