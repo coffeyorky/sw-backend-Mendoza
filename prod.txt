@@ -1,0 +1,29 @@
+[
+  {
+    "id": 4,
+    "title": "Funko Hunter Star Wars",
+    "description": "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
+    "price": 150,
+    "imagen": "https://i.ibb.co/pw82S81/funko.jpg",
+    "code": "st15",
+    "stock": 15
+  },
+  {
+    "id": 1,
+    "title": "Remera Bad batch",
+    "description": "Remera de talla universal con estampado de los personajes de la serie The Bad Batch",
+    "price": 100,
+    "imagen": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+    "code": "sw10",
+    "stock": 15
+  },
+  {
+    "id": 2,
+    "title": "Taza Star wars",
+    "description": "Vasija pequeña de color blanco con el logo de un Trooper en medio",
+    "price": 200,
+    "imagen": "https://i.ibb.co/5k7ZKWY/taza.png",
+    "code": "sw11",
+    "stock": 15
+  }
+]
