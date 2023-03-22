@@ -1,8 +1,7 @@
 // const { promises: fs } = require("fs");
-const fs = require("fs");
-const path = "./prod.txt";
+import {promises as fs} from "fs";
 
-class ProductManager {
+export default class ProductManager {
   constructor() {
     this.ruta = "./prod.txt";
     this.products = [];
@@ -33,7 +32,7 @@ class ProductManager {
     };
 
     this.products.push(newProduct);
-    await fs.promises.writeFile(
+    await fs.writeFile(
       this.ruta,
       JSON.stringify(this.products, null, 2),
       "utf-8"
@@ -41,7 +40,7 @@ class ProductManager {
   };
 
   readProducts = async () => {
-    let rea = await fs.promises.readFile(this.ruta, "utf-8");
+    let rea = await fs.readFile(this.ruta, "utf-8");
     return JSON.parse(rea);
   };
 
@@ -65,7 +64,7 @@ class ProductManager {
     let productos = await this.readProducts();
     let productosFilt = productos.filter((products) => products.id != id);
 
-    await fs.promises.writeFile(
+    await fs.writeFile(
       this.ruta,
       JSON.stringify(productosFilt, null, 2),
       "utf-8"
@@ -78,56 +77,72 @@ class ProductManager {
     await this.deleteById(id);
     let producOld = await this.readProducts();
     let modif = [{...producto, id }, ...producOld];
-    await fs.promises.writeFile(this.ruta, JSON.stringify(modif, null, 2), "utf-8")
+    await fs.writeFile(this.ruta, JSON.stringify(modif, null, 2), "utf-8")
   };
 }
 
-const productos = new ProductManager();
-// productos.addProduct(
-//   "Remera Bad batch",
-//   "Remera de talla universal con estampado de los personajes de la serie The Bad Batch",
-//   100,
-//   "https://i.ibb.co/VVcTQv2/thbbr.jpg",
-//   "sw10",
-//   15
-// );
+// const productos = new ProductManager();
 //  productos.addProduct(
-//    "Taza Star wars",
-//    "Vasija pequeña de color blanco con el logo de un Trooper en medio",
-//    200,
-//    "https://i.ibb.co/5k7ZKWY/taza.png",
-//    "sw11",
+//    "Remera Bad batch",
+//    "Remera de talla universal con estampado de los personajes de la serie The Bad Batch",
+//    100,
+//    "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+//    "sw10",
 //    15
 //  );
+//   productos.addProduct(
+//     "Taza Star wars",
+//     "Vasija pequeña de color blanco con el logo de un Trooper en medio",
+//     200,
+//     "https://i.ibb.co/5k7ZKWY/taza.png",
+//     "sw11",
+//     15
+//   );
+//   productos.addProduct(
+//     "Figura Black Series",
+//     "Figuras HotToys de rex y cody de Clone Wars - 1/6 scale collectible figure",
+//     160,
+//     "https://i.ibb.co/NZSXyYt/rex.jpg",
+//     "st14",
+//     15
+//   )
+//   productos.addProduct(
+//     "Funko Hunter Star Wars",
+//     "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
+//     90,
+//     "https://i.ibb.co/pw82S81/funko.jpg",
+//     "st15",
+//     15
+//   );
 //  productos.addProduct(
-//    "Figura Black Series",
-//    "Figuras HotToys de rex y cody de Clone Wars - 1/6 scale collectible figure",
-//    160,
-//    "https://i.ibb.co/NZSXyYt/rex.jpg",
-//    "st14",
+//    "Coleccionable",
+//    "Figura HotToys del protagonista de The Mandalorian",  
+//    100,  
+//    "https://i.ibb.co/sRYD530/tmand.jpg",
+//    "st16",
 //    15
 //  )
 //  productos.addProduct(
-//    "Funko Hunter Star Wars",
-//    "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
-//    90,
-//    "https://i.ibb.co/pw82S81/funko.jpg",
-//    "st15",
+//    "Comic Darth Maul",
+//    "Historias del pasado del hijo de dathomir, 40 hojas",
+//    70,
+//    "https://i.ibb.co/KNN9Vcm/comic.jpg",
+//    "st17",
 //    15
-//  );
+//  )
 
 // console.log("añadido", productos.addProduct());
 
-productos.updateProduct({
-  id: 4,
-  title: "Funko Hunter Star Wars",
-  description: "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
-  price: 150,
-  imagen: "https://i.ibb.co/pw82S81/funko.jpg",
-  code: "st15",
-  stock: 15,
-});
+// productos.updateProduct({
+//   id: 4,
+//   title: "Funko Hunter Star Wars",
+//   description: "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
+//   price: 150,
+//   imagen: "https://i.ibb.co/pw82S81/funko.jpg",
+//   code: "st15",
+//   stock: 15,
+// });
 
-productos.getProducts();
-productos.getProductById(2);
-module.exports = ProductManager;
+// productos.getProducts();
+// productos.getProductById(2);
+

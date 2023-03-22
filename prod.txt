@@ -1,14 +1,5 @@
 [
   {
-    "id": 4,
-    "title": "Funko Hunter Star Wars",
-    "description": "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
-    "price": 150,
-    "imagen": "https://i.ibb.co/pw82S81/funko.jpg",
-    "code": "st15",
-    "stock": 15
-  },
-  {
     "id": 1,
     "title": "Remera Bad batch",
     "description": "Remera de talla universal con estampado de los personajes de la serie The Bad Batch",
@@ -24,6 +15,42 @@
     "price": 200,
     "imagen": "https://i.ibb.co/5k7ZKWY/taza.png",
     "code": "sw11",
+    "stock": 15
+  },
+  {
+    "id": 3,
+    "title": "Figura Black Series",
+    "description": "Figuras HotToys de rex y cody de Clone Wars - 1/6 scale collectible figure",
+    "price": 160,
+    "imagen": "https://i.ibb.co/NZSXyYt/rex.jpg",
+    "code": "st14",
+    "stock": 15
+  },
+  {
+    "id": 4,
+    "title": "Funko Hunter Star Wars",
+    "description": "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
+    "price": 90,
+    "imagen": "https://i.ibb.co/pw82S81/funko.jpg",
+    "code": "st15",
+    "stock": 15
+  },
+  {
+    "id": 5,
+    "title": "Coleccionable",
+    "description": "Figura HotToys del protagonista de The Mandalorian",
+    "price": 100,
+    "imagen": "https://i.ibb.co/sRYD530/tmand.jpg",
+    "code": "st16",
+    "stock": 15
+  },
+  {
+    "id": 6,
+    "title": "Comic Darth Maul",
+    "description": "Historias del pasado del hijo de dathomir, 40 hojas",
+    "price": 70,
+    "imagen": "https://i.ibb.co/KNN9Vcm/comic.jpg",
+    "code": "st17",
     "stock": 15
   }
 ]
