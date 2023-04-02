@@ -1,0 +1,28 @@
+
+<div class="caja">
+    <p>Ingresar Producto</p>
+    <nav>
+        <ul>
+            <li>Id<input id="chatbox"></li>
+            <li>Title<input id="chatbox"></li>
+            <li>Description<input id="chatbox"></li>
+            <li>Code<input id="chatbox"></li>
+        </ul>
+    </nav>
+    <button id="logs">Agregar</button>
+</div>
+
+ <ul class="dirigir">
+      {{#each productos}}
+<div class="caja">
+    <h2>{{this.title}}</h2>
+    <h4>{{this.category}}</h4>
+    <p>{{this.description}}</p>
+    <h3>{{this.price}}</h3>
+     </div>
+    {{/each}}  
+ </ul>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/virtual/js/app.js"></script>

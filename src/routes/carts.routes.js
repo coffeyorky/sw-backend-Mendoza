@@ -1,29 +1,30 @@
-import { Router } from "express";
-import CartManager from "../components/CartManager.js";
+const { Router } = require('express')
+const CartManager = require("../components/CartManager.js");
 
-const CartRou = Router()
+const CartRouter = Router()
 const carts = new CartManager
 
-CartRou.post("/", async (req, res) => {
+CartRouter.post("/", async (req, res) => {
     const resp = await carts.createCart({productos: []})
     res.send({resp})
 })
 
-CartRou.get("/", async (req, res) => {
+CartRouter.get("/", async (req, res) => {
     res.send(await carts.leeArch())
 })
 
-CartRou.get("/:cid", async (req, res) => {
+CartRouter.get("/:cid", async (req, res) => {
     const {cid} = req.params
     const resp = await carts.getCartById(parseInt(cid))
     res.send({resp})
 })  
 
-CartRou.post("/:cid/products/:pid", async (req,res) => {
+CartRouter.post("/:cid/products/:pid", async (req,res) => {
     const {cid, pid} = req.params
     const resp = await carts.addProductInCart(parseInt(cid), paseInt(pid))
     res.send({resp})
 })
 
 
-export default CartRou
+
+module.exports = {CartRouter}

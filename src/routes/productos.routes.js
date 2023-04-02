@@ -1,9 +1,17 @@
-import { Router } from "express";
-import ProductManager from "../components/productManager.js";
+const { Router } = require('express')
+const ProductManager = require("../components/productManager.js");
+
 
 const ProductRou = Router()
 const productos = new ProductManager();
 
+ProductRou.get("/", (req,res) => {
+    return res.send("Get de productos")
+})
+
+ProductRou.get("/", (req,res) => {
+    return res.send("Post de productos")
+})
 
 ProductRou.get("/", async (req, res) => {
     res.send(await productos.getProducts())
@@ -11,7 +19,7 @@ ProductRou.get("/", async (req, res) => {
 
 ProductRou.get("/:id", async (req, res) => {
     let id = req.params.id
-    res.send(await productos.getProducts(id))
+    res.send(await productos.getProdById(id))
 })
 
 ProductRou.post("/", async (req,res) => {
@@ -30,5 +38,5 @@ ProductRou.delete("/:id", async (req,res) => {
     res.send(await productos.deleteProducts(id))
 })
 
-export default ProductRou
+module.exports = ProductRou
 

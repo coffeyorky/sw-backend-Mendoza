@@ -64,5 +64,16 @@
     "stock": 15,
     "category": "novelas",
     "imagen": "https://i.ibb.co/KNN9Vcm/comic.jpg"
+  }, 
+  {
+    "id": "7",
+    "title": "Tostadora Darth Vader",
+    "description": "Pequeña maquina diseñada para tostar pan, esta en particular hace las tostadas con marcas de Darth vader",
+    "code": "sw18"
+    "price": "90",
+    "status": "true",
+    "stock": 15,
+    "category": "merch",
+    "imagen": "https://i.ibb.co/nsVSL12/tostadora-Vader.png"
   }
 ]

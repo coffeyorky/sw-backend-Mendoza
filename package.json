@@ -1,11 +1,11 @@
 {
-  "type": "module",
   "name": "starwars-backend",
   "version": "1.0.0",
   "description": "",
   "main": "productManager.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
     "server": "nodemon src/index.js"
   },
   "repository": {
@@ -21,9 +21,9 @@
   "homepage": "https://github.com/coffeyorky/sw-backend-Mendoza#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "nanoid": "^4.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.21"
+    "express-handlebars": "^7.0.4",
+    "nanoid": "^4.0.2",
+    "nodemon": "^2.0.22",
+    "socket.io": "^4.6.1"
   }
 }

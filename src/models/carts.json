@@ -22,23 +22,15 @@
     ]
   },
   {
-    "id": "zw",
-    "cantidad": 1
-  },
-  {
-    "id": "E4",
-    "products": []
-  },
-  {
-    "id": "iO",
-    "products": []
-  },
-  {
     "id": 6,
     "productos": []
   },
   {
     "id": 7,
+    "productos": []
+  },
+  {
+    "id": 8,
     "productos": []
   }
 ]

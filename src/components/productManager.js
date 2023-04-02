@@ -1,5 +1,5 @@
-import { promises as fs } from "fs";
-import { nanoid } from "nanoid";
+const { promises : fs } = require("fs");
+const { nanoid } = ("nanoid");
 
 class ProductManager {
   constructor() {
@@ -32,9 +32,9 @@ class ProductManager {
   };
 
   getProdById = async (id) => {
-    let prodById = await this.exist(id);
-    if (prodById) return "producto no encontrado";
-    return prodById;
+     let prodById = await this.exist(id);
+     if (prodById) return "producto no encontrado";
+     return prodById;
   };
 
   updateProducts = async (id, produc) => {
@@ -59,4 +59,4 @@ class ProductManager {
   };
 }
 
-export default ProductManager;
+module.exports = ProductManager;
