@@ -1,0 +1,28 @@
+GET http://localhost:8080/api/realTimeProducts
+
+### POST USER
+
+POST http://localhost:8080/api/realTimeProducts
+Content-Type: application/json
+
+{
+"first_name": "Luke",
+"last_name": "skywalker2",
+"email": "test@test.com"
+}
+
+### UPDATE USER
+
+PUT http://localhost:8080/api/realTimeProducts/643b3e939b83b64f5b33cea6
+Content-Type: application/json
+
+{
+"first_name": "Anakin",
+"last_name": "skywalker",
+"email": "test@gmail.com"
+}
+
+### DELETE USER
+
+DELETE http://localhost:8080/api/realTimeProducts/643b3e939b83b64f5b33cea6
+Content-Type: application/json
