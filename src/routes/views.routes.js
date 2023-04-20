@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { ProductManagerMongo } = require("../managersDao/productManagerMongo.js");
+const { ProductManagerMongo } = require("../dao/productManagerMongo.js");
 
 
 const router = Router()
@@ -31,7 +31,6 @@ router.post("/", async (request, response) => {
         return response.status(400).send({ message: 'pasar todos los datos'})
       }
       let userAgregado = await usersManager.addProduct({last_name, first_name, email})
-      // console.log(userAgregado)
       response.status(201).send({
         userAgregado,
         message: "usuario creado"
