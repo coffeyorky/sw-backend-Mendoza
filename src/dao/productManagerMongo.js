@@ -1,30 +1,24 @@
-const { userModel } = require("../models/users.model")
-
+const  productModel  = require("../models/products.model.js");
 
 class ProductManagerMongo {
-
-    getUsers = async () => await userModel.find()
-
-    getProductsById = ( id ) => {
-
-    }
-
-    addProduct = async (newItem) => {
-        return await userModel.create(newItem)
-    }
-
-    updateUser = async (uid, userToReplace) => {
-        return await userModel.updateOne({_id: uid}, userToReplace)
-    }
-
-    deletUser = async (uid) => {
-        return await userModel.deleteOne({_id: uid})
-    }
+  async getProduct() {
+    const resp = await productModel.find().lean()
+    console.log(resp)
+    return resp
+  }
+  async getProductsById(pid) {
+    return "get PRODUCTOS";
+  }
+  async addProduct(newProduct) {
+    return await productModel.create(newProduct);
+  }
+  async updateProduct(pid, productToReplace) {
+    return await productModel.updateOne({_id: pid}, productToReplace)
+  }
+  async deleteProduct(pid) {
+    return await productModel.deleteOne({_id: pid})
+  }
 
 }
 
-
-
-
-
-module.exports = {ProductManagerMongo}
+module.exports = new ProductManagerMongo();

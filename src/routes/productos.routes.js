@@ -1,42 +1,58 @@
-const { Router } = require('express')
-const ProductManager = require("../components/productManager.js");
+const { Router } = require("express");
+const productManager = require("../dao/productManagerMongo");
 
+const router = Router();
 
-const ProductRou = Router()
-const productos = new ProductManager();
+router.get("/", async (req, res) => {
+  const resp = await productManager.getProduct();
+  res.send(resp);
+});
 
-ProductRou.get("/", (req,res) => {
-    return res.send("Get de productos")
-})
+router.get("/:pid", async (req, res) => {
+  res.send("get product by id");
+});
 
-ProductRou.get("/", (req,res) => {
-    return res.send("Post de productos")
-})
+router.post("/", async (req, res) => {
+  try {
+    let { title, description, price, thumbnail, stock, code, status } = req.body;
+    if (!title || !thumbnail) {
+      return response.status(400).send({ message: "pasar todos los datos" });
+    }
+    let prodAgregado = await productManager.addProduct({
+      title, description, price, thumbnail, stock, code, status
+    });
+    res.status(201).send({
+      prodAgregado,
+      message: "producto creado",
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-ProductRou.get("/", async (req, res) => {
-    res.send(await productos.getProducts())
-})
+router.put("/:pid", async (req, res) => {
+  const { pid } = req.params;
 
-ProductRou.get("/:id", async (req, res) => {
-    let id = req.params.id
-    res.send(await productos.getProdById(id))
-})
+  let productToReplace = req.body;
+  if (
+    !productToReplace.title ||
+    !productToReplace.thumbnail ||
+    !productToReplace.price ||
+    !productToReplace.code
+  ) {
+    return res.status(400).send({ message: "pasar todos los datos" });
+  }
+  let result = await productManager.updateProduct(pid, productToReplace);
+  res.status(201).send({
+    users: result,
+    message: "usuario Modificado",
+  });
+});
 
-ProductRou.post("/", async (req,res) => {
-    let newProduct = req.body
-    res.send(await productos.addProducts(newProduct))
-  })
+router.delete("/:pid", async (req, res) => {
+  const { pid } = req.params;
+  let result = await productManager.deleteProduct(pid);
+  res.status(200).send({ message: "Producto borrado", result });
+});
 
-ProductRou.put("/:id", async (req,res) => {
-    let id = req.params.id
-    let actuProduct = req.body;
-    res.send(await productos.updateProducts(id, actuProduct))
-})
-
-ProductRou.delete("/:id", async (req,res) => {
-    let id = req.params.id
-    res.send(await productos.deleteProducts(id))
-})
-
-module.exports = ProductRou
-
+module.exports = router;

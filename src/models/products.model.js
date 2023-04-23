@@ -1,21 +1,35 @@
 const { Schema, model } = require("mongoose")
 
-const collection = "products"
-const UserSchema = new Schema({
-    first_name: String,
-    last_name: {
+const collection = "productos"
+const productSchema = new Schema({
+    title:{
         type: String,
         required: true
     },
-    email: {
+    description: {
         type: String,
-        unique: true,
         required: true
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    thumbnail: {
+        type: String
+    },
+    stock: {
+        type: Number,
+        required: true
+    },
+    code: {
+        type: String,
+        required: true
+    },
+    status: {
+        type: Boolean
     }
 })
 
-const userModel = model(collection, UserSchema)
 
-module.exports = {
-    userModel
-}
+
+module.exports = model(collection, productSchema)

@@ -5,7 +5,6 @@ const productos = new ProductManager();
 
 const router =  Router()
 
-
 const prodArray = [
     {
         "id": "1",
@@ -83,8 +82,6 @@ router.get("/", async (req, res) => {
           productos : allProducts
       })
 })
-
-
 
 
 module.exports = router

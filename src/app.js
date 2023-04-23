@@ -26,11 +26,10 @@ app.engine("handlebars", handlebars.engine());
 app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
-app.use("/", express.static(__dirname + "/public"));
+app.use("/subir", express.static(__dirname + "/public"));
 
 app.use("/", viewsRouter);
-app.use("/api/realTimeProducts", views);
-app.use("/api/productos", ProductRou);
+app.use("/api/producto", ProductRou);
 app.use("/api/cart", CartRouter);
 
 app.listen(PORT, err => {

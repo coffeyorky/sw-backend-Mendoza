@@ -1,28 +1,32 @@
-GET http://localhost:8080/api/realTimeProducts
+GET http://localhost:8080/api/productos
 
-### POST USER
+###
 
-POST http://localhost:8080/api/realTimeProducts
+POST http://localhost:8080/api/productos
 Content-Type: application/json
 
 {
-"first_name": "Luke",
-"last_name": "skywalker2",
-"email": "test@test.com"
+    "title": "Remera Bad batch",
+    "description": "Remera de talla universal con estampado de los personajes de la serie The Bad Batch",
+    "price": 100,
+    "thumbnail": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+    "stock": 15,
+    "code": "sw10",
+    "status": true
 }
 
-### UPDATE USER
+###
 
-PUT http://localhost:8080/api/realTimeProducts/643b3e939b83b64f5b33cea6
+PUT http://localhost:8080/api/productos/64436d10a1eae7c5e94ae88d
 Content-Type: application/json
 
 {
-"first_name": "Anakin",
-"last_name": "skywalker",
-"email": "test@gmail.com"
+    "title": "Remera Bad batch",
+    "thumbnail": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+    "price": 150,
+    "code": "sw10"
 }
 
 ### DELETE USER
 
-DELETE http://localhost:8080/api/realTimeProducts/643b3e939b83b64f5b33cea6
-Content-Type: application/json
+DELETE http://localhost:8080/api/productos/64436d10a1eae7c5e94ae88d
