@@ -13,11 +13,11 @@ const CartSchema = new Schema({
    
 })
 
-CartSchema.pre('find', function(){
-    this.populate('products.product')
-})
+ CartSchema.pre('find', function(){
+     this.populate('products.product')
+ })
 
-const cartModel = model(collection,CartSchema)
+const cartModel = model(collection, CartSchema)
 
 module.exports = {
     cartModel
