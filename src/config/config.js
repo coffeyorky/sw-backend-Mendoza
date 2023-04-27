@@ -1,6 +1,4 @@
 const { connect } = require("mongoose");
-const { productsModel } = require("../models/products.model");
-const { cartModel } = require("../models/carts.model");
 const { ordenes } = require("./ordenes");
 const { orderModel } = require("../models/orders.model");
 
@@ -31,22 +29,20 @@ const objConfig = {
       {
         $sort: {totalquantity: -1 }
       },
-      // {
-      //   $group: {_id: 1, orders: {$push: `$$ROOT`}}
-      // },
+       {
+         $group: {_id: 1, orders: {$push: `$$ROOT`}}
+       },
       {
         $project:{
           "_id": 0,
           orders: "$orders"
         }
-
       },
       {
          $merge: {
           into: "reports"
         }
       }
-
     ])
       console.log(orders)
 

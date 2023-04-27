@@ -27,6 +27,38 @@ Content-Type: application/json
     "code": "sw10"
 }
 
-### DELETE USER
+### 
 
 DELETE http://localhost:8080/api/productos/64436d10a1eae7c5e94ae88d
+
+### CART
+
+GET http://localhost:8080/api/carts
+
+###
+
+POST http://localhost:8080/api/carts
+Content-Type: application/json
+
+{
+    "products": []
+}
+
+###
+
+PUT http://localhost:8080/api/carts/6444c17fc2fedfd83c779ce6
+Content-Type: application/json
+
+{
+    "products": 
+         {   "title": "Remera Bad batch",
+            "thumbnail": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+            "price": 150,
+            "code": "sw10"}
+    
+}
+
+###
+
+DELETE http://localhost:8080/api/carts/6444c09576defc54cd0a9ef2
+

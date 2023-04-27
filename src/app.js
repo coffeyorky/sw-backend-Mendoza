@@ -1,9 +1,8 @@
 const express = require("express");
 const routerApp = require("./routes");
 const ProductRou = require("./routes/productos.routes.js");
-const { CartRouter } = require("./routes/carts.routes.js");
+const CartRouter = require("./routes/carts.routes.js");
 const viewsRouter = require("./routes/allProduct.routes.js");
-const views = require("./routes/views.routes.js");
 const handlebars = require("express-handlebars");
 
 const { objConfig } = require("./config/config.js");

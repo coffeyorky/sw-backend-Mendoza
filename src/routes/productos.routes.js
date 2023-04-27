@@ -45,7 +45,7 @@ router.put("/:pid", async (req, res) => {
   let result = await productManager.updateProduct(pid, productToReplace);
   res.status(201).send({
     users: result,
-    message: "usuario Modificado",
+    message: "Producto Modificado",
   });
 });
 

@@ -30,8 +30,6 @@ const productSchema = new Schema({
   },
 });
 
-const productsModel = model(collection, productSchema);
 
-module.exports = {
-  productsModel
-};
+
+module.exports = model(collection, productSchema);
