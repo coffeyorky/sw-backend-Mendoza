@@ -4,8 +4,23 @@ const productManager = require("../dao/productManagerMongo");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const resp = await productManager.getProduct();
-  res.send(resp);
+  try {
+    const { page = 1, limit=4 } = req.query;
+    const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
+      await productManager.getProduct({ page, limit });
+    if (!docs) {
+      return res.status(400).send("no hay productos");
+    }
+    res.status(200).render(`product`, {
+      products: docs,
+      hasPrevPage,
+      prevPage,
+      hasNextPage,
+      nextPage,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get("/:pid", async (req, res) => {
@@ -14,12 +29,19 @@ router.get("/:pid", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    let { title, description, price, thumbnail, stock, code, status } = req.body;
+    let { title, description, price, thumbnail, stock, code, status } =
+      req.body;
     if (!title || !thumbnail) {
-      return response.status(400).send({ message: "pasar todos los datos" });
+      return res.status(400).send({ message: "pasar todos los datos" });
     }
     let prodAgregado = await productManager.addProduct({
-      title, description, price, thumbnail, stock, code, status
+      title,
+      description,
+      price,
+      thumbnail,
+      stock,
+      code,
+      status,
     });
     res.status(201).send({
       prodAgregado,

@@ -6,13 +6,13 @@ POST http://localhost:8080/api/productos
 Content-Type: application/json
 
 {
-    "title": "Remera Bad batch",
-    "description": "Remera de talla universal con estampado de los personajes de la serie The Bad Batch",
-    "price": 100,
-    "thumbnail": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+    "title": "Star Wars: Savage Opress Mini Busto",
+    "description": "Una vez un Hermano de la Noche común, ahora Savage Opress convertido en el aprendiz Sith del Conde Dooku, y más tarde en la mano derecha del imperio criminal de Darth Maul. ¡Ahora, es un mini busto a escala 1/6 completamente nuevo de Gentle Giant LTD! Con una altura aproximada de 6,5 pulgadas, este detallado minibusto captura al Dathomirian con el sable de luz apuntando a su oponente",
+    "price": "50",
+    "thumbnail": "https://i.ibb.co/0ng5kH1/CW-Savage-Opress-Bust.jpg",
     "stock": 15,
-    "code": "sw10",
-    "status": true
+    "code": "sw21",
+    "status": "true"
 }
 
 ###

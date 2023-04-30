@@ -1,6 +1,7 @@
 const { connect } = require("mongoose");
 const { ordenes } = require("./ordenes");
 const { orderModel } = require("../models/orders.model");
+const productsModel = require("../models/products.model");
 
 let url =
   "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority";
@@ -18,13 +19,16 @@ const objConfig = {
 
     // let result = await orderModel.find({})
     // console.log(result)
+     
+    let result = await productsModel.find({})
+    console.log(result)
 
-    const orders = await orderModel.aggregate([
+    const product = await productsModel.aggregate([
       {
         $match: {size: `medium`}
       },
       {
-        $group:{_id: `$name`, totalquantity: {$sum: "$quantity"}}
+        $group:{_id: `$title`, totalquantity: {$sum: "$quantity"}}
       },
       {
         $sort: {totalquantity: -1 }
@@ -44,7 +48,7 @@ const objConfig = {
         }
       }
     ])
-      console.log(orders)
+      console.log(product)
 
   }
 };
