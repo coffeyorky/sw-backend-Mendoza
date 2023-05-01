@@ -1,6 +1,5 @@
 const { connect } = require("mongoose");
 const { ordenes } = require("./ordenes");
-const { orderModel } = require("../models/orders.model");
 const productsModel = require("../models/products.model");
 
 let url =
@@ -15,39 +14,28 @@ const objConfig = {
       console.log(error)
     }
     
-    // let result = await orderModel.insertMany(ordenes)
+    //  const insertProducts = async() =>{
+    //      const result = await productsModel.insertMany(ordenes)
+    //      console.log(result) 
+    //  }
+    //  insertProducts()
 
-    // let result = await orderModel.find({})
-    // console.log(result)
-     
-    let result = await productsModel.find({})
-    console.log(result)
-
-    const product = await productsModel.aggregate([
-      {
-        $match: {size: `medium`}
-      },
-      {
-        $group:{_id: `$title`, totalquantity: {$sum: "$quantity"}}
-      },
-      {
-        $sort: {totalquantity: -1 }
-      },
+     const product = await productsModel.aggregate([
        {
-         $group: {_id: 1, orders: {$push: `$$ROOT`}}
+         $match: {category: `figuras`}
        },
-      {
-        $project:{
-          "_id": 0,
-          orders: "$orders"
-        }
-      },
-      {
-         $merge: {
-          into: "reports"
-        }
-      }
-    ])
+       {
+         $group: {_id: `figuras`, promedio: {$avg: `$price`}}
+       },
+       {
+          $sort: {_id: 1}
+       }
+    //   {
+    //      $merge: {
+    //       into: "reports"
+    //     }
+    //   }
+     ])
       console.log(product)
 
   }
