@@ -26,10 +26,10 @@ const objConfig = {
        },
        {
          $group: {_id: `figuras`, promedio: {$avg: `$price`}}
-       },
-       {
-          $sort: {_id: 1}
        }
+      //  {
+      //     $sort: {_id: 1}
+      //  }
     //   {
     //      $merge: {
     //       into: "reports"
