@@ -4,9 +4,11 @@ const ProductRou = require("./routes/productos.routes.js");
 const CartRouter = require("./routes/carts.routes.js");
 const viewsRouter = require("./routes/allProduct.routes.js");
 const cookieRouter = require("./routes/cookie.router.js")
+const sessionRouter = require("./routes/session.router.js")
 const handlebars = require("express-handlebars");
 const { objConfig } = require("./config/config.js");
 const cookieParser = require("cookie-parser")
+const session = require("express-session")
 
 objConfig.connectDB();
 
@@ -17,6 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser("CoderS3cR3tQ@"))
+app.use(session({
+  secret: "secretCoder",
+  resave: true,
+  saveUninitialized: true
+}))
 
 app.use(routerApp);
 
@@ -30,6 +37,7 @@ app.set("views", __dirname + "/views");
 
 app.use("/subir", express.static(__dirname + "/public"));
 
+app.use("/session", sessionRouter)
 app.use("/cookie", cookieRouter)
 app.use("/", viewsRouter);
 app.use("/api/producto", ProductRou);
