@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const productManager = require("../dao/productManagerMongo");
+const { authSession } = require("../middleware/auth.middleware");
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", authSession, async (req, res) => {
   try {
     const { page = 1, limit=4 } = req.query;
     const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =

@@ -9,6 +9,10 @@ const handlebars = require("express-handlebars");
 const { objConfig } = require("./config/config.js");
 const cookieParser = require("cookie-parser")
 const session = require("express-session")
+const FileStore = require("session-file-store")
+
+const fileStorege = FileStore(session)
+const {create} = require("connect-mongo")
 
 objConfig.connectDB();
 
@@ -19,7 +23,27 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser("CoderS3cR3tQ@"))
+
+// app.use(session({
+//   store: new MongoStorege({
+//     ttl: 100000000000,
+//     retries: 3,
+//     path: __dirname+`/fileSession`
+//   }),
+//   secret: "secretCoder",
+//   resave: true,
+//   saveUninitialized: true
+// }))
+
 app.use(session({
+  store: create({
+    mongoUrl: objConfig.url,
+    mongoOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+      },
+      ttl: 1000000000
+  }),
   secret: "secretCoder",
   resave: true,
   saveUninitialized: true
