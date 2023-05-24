@@ -8,8 +8,8 @@ router.get("/", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username } = req.body;
-  const user = await userModel.findOne({ username});
+  const { email } = req.body;
+  const user = await userModel.findOne({ email});
   console.log(user)
   if (!user) {
     return res.send({
@@ -19,8 +19,8 @@ router.post("/login", async (req, res) => {
   }
   
   req.session.user = {
-    username: user.username,
     email: user.email,
+    admin: true
   };
 
   res.send({
