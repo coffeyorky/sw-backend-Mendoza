@@ -1,5 +1,6 @@
 const { Router } = require("express");
-const { userModel } = require("../models/user.model");
+const { userModel } = require("../models/user.model.js");
+const { createHash, checkValidPassword } = require("../utils/brcyptPass.js");
 
 const router = Router();
 
@@ -8,9 +9,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { email } = req.body;
-  const user = await userModel.findOne({ email});
+  const { username, password } = req.body;
+  const user = await userModel.findOne({ username });
   console.log(user)
+
   if (!user) {
     return res.send({
       status: "error",
@@ -18,7 +20,14 @@ router.post("/login", async (req, res) => {
     });
   }
   
+  const isValidPassword = checkValidPassword({
+    hashedPassword: user.password,
+    password
+  })
+  console.log({isValidPassword})
+
   req.session.user = {
+    username: user.username,
     email: user.email,
     admin: true
   };
@@ -40,14 +49,18 @@ router.post("/register", async (req, res) => {
 
     const exist = await userModel.findOne({ email });
     if (exist) return res.send({ status: "error", message: "ya existe el usuario" });
+    
+    const passwordHash = createHash(password)
+    console.log({passwordHash})
+
     const newUser = {
       username,
       first_name,
       last_name,
       email,
-      password,
+      password: passwordHash,
     };
-    console.log(newUser);
+    
     await userModel.create(newUser);
     res.status(200).render("login");
 

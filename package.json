@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/coffeyorky/sw-backend-Mendoza#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.3",
     "connect-mongo": "^5.0.0",
     "cookie-parser": "^1.4.6",
