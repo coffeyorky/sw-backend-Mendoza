@@ -4,19 +4,18 @@ class UserManagerMongo{
     // constructor(){
     //     this.products = []
     // }
-    getUsers = async () =>  {
-        const resp = await userModel.find({first_name:"Celia"}).explain('executionStats')
+    get = async ({page, limit, query=""}) =>  {
+        const resp = await userModel.paginate({}, {limit, page, lean: true})
         console.log(resp)
         return resp
     }
 
-    getProductById = (id) => {
-       
+    getById = async (id) => {
+       return await userModel.findById({_id: id})
     }
     
-    
-    addUser = async (newItem) => {
-        return await userModel.create(newItem) 
+    save = async (newItem) => {
+        return await userModel.create(newItem)
     }
 
     updateUser = async (uid, userToReplace) => {

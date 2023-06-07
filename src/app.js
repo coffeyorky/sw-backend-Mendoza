@@ -12,7 +12,9 @@ const session = require("express-session")
 const FileStore = require("session-file-store")
 
 const fileStorege = FileStore(session)
-const {create} = require("connect-mongo")
+const {create} = require("connect-mongo");
+const passport = require("passport");
+const { initializePassport } = require("./config/passport.config");
 
 objConfig.connectDB();
 
@@ -42,12 +44,16 @@ app.use(session({
       useNewUrlParser: true,
       useUnifiedTopology: true
       },
-      ttl: 1000000000
+      ttl: 100000000*24
   }),
   secret: "secretCoder",
   resave: true,
   saveUninitialized: true
 }))
+
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(routerApp);
 
