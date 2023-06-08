@@ -75,7 +75,7 @@ const initializePassport = () => {
       callbackURL: "http://localhost:8080/session/githubcallback",
       scope: ["user:email"] ,
     },
-    async (accessToken, refreshToken, profile, done) => {
+    async (token, refreshToken, profile, done) => {
       try{
         console.log({ email: profile.emails[0].value })
       const user = await userModel.findOne({ email: profile.emails[0].value})
