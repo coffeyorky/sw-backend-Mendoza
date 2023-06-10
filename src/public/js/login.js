@@ -1,3 +1,4 @@
+console.log("estamos aca")
 
 const form = document.querySelector("#login")
 form.addEventListener("submit", (e) =>{
@@ -19,9 +20,13 @@ form.addEventListener("submit", (e) =>{
         return respuesta.json()
     })
     .then(respuesta => {
-        localStorage.setItem("token", respuesta.token)
         console.log(respuesta.token)
+        localStorage.setItem("token", respuesta.token)
+        
     })
 })
 
+const getCookie = () => {
+    console.log(document.cookie)
+}
 

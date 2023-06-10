@@ -5,6 +5,7 @@ const CartRouter = require("./routes/carts.routes.js");
 const viewsRouter = require("./routes/allProduct.routes.js");
 const cookieRouter = require("./routes/cookie.router.js")
 const sessionRouter = require("./routes/session.router.js")
+const userRouter = require("./routes/users.router.js")
 const handlebars = require("express-handlebars");
 const { objConfig } = require("./config/config.js");
 const cookieParser = require("cookie-parser")
@@ -72,6 +73,7 @@ app.use("/cookie", cookieRouter)
 app.use("/", viewsRouter);
 app.use("/api/producto", ProductRou);
 app.use("/api/cart", CartRouter);
+app.use("/api/usuarios", userRouter)
 
 app.listen(PORT, err => {
   if (err) {

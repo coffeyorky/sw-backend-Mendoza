@@ -62,3 +62,30 @@ Content-Type: application/json
 
 DELETE http://localhost:8080/api/carts/6444c09576defc54cd0a9ef2
 
+###
+
+POST http://localhost:8080/session/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "rex@rex",
+    "password": "rex"
+}
+
+###
+
+POST http://localhost:8080/session/register
+Content-Type: application/json
+
+{
+    "username": "rex",
+    "first_name": "rex",
+    "last_name": "rex",
+    "password": "rex",
+    "email": "rex@ani"
+}
+
+###
+GET http://localhost:8080/api/usuarios
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4NjM3MzgzNSwiZXhwIjoxNjg2NDYwMjM1fQ.Nf5josIgwrIr569JqTza9llMmLHCjsN6AFkEPR0yuYc

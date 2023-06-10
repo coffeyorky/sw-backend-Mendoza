@@ -3,86 +3,84 @@ const { userModel } = require("../models/user.model.js");
 const { createHash, checkValidPassword } = require("../utils/brcyptPass.js");
 const passport = require("passport");
 const { generateToken, authToken } = require("../utils/jsonwebtoken.js");
+const jwt = require("jsonwebtoken");
 
 const router = Router();
 
-const users = [];
+const users = [
+  {
+    first_name: "rex",
+    last_name: "rex",
+    email: "rex@rex",
+    password: "rex",
+    admin: true,
+  },
+];
 
 router.get("/", (req, res) => {
   res.render("login", {});
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", (req, res) => {
   const { email, password } = req.body;
-  const user = users.find((user) => user.email === email && user.password === password);
-  if (!user)
-    return res
-      .status(400)
-      .send({ status: "error", message: "revisar usuario y contraseña" });
-    const token = generateToken(user);
+  // const user = users.find((user) => user.email === email && user.password === password);
+  if (email !== "rex@rex" || password !== "rex") {
+    return res.status(401).send({
+      status: "error",
+      message: "revisar usuario y contraseña",
+    });
+  }
+  let token = jwt.sign({ email, password }, "CoderS3cR3tQ@", { expiresIn: "24h" });
 
-  res.status(200).send({
-    status: "success",
-    message: "Login in successfully",
-    payload: token,
-  });
+  res.cookie("coderCookie", token, { 
+       maxAge: 60 * 60 * 1000,
+       httpOnly: true
+     })
+    .status(200).send({
+      status: "success",
+      message: "Login in successfully",
+      token,
+    });
 });
 
-router.get("/current", authToken, (req, res) => {
-  res.send({
-    status: "success",
-    payload: req.user,
-  });
-});
+// router.get("/current", authToken, (req, res) => {
+//   res.send({
+//     status: "success",
+//     payload: req.user,
+//   });
+// });
 
 router.get("/register", (req, res) => {
   res.render("register");
 });
 
 router.post("/register", async (req, res) => {
-  const { name, email, password } = req.body;
-  const userExist = users.find((user) => user.email === email);
-  if (userExist)
-    return res
-      .status(400)
-      .send({ status: "error", message: "el usuario ya existe" });
-  const newUser = {
-    name,
-    email,
-    password,
-  };
+  try {
+    const { username, first_name, last_name, email, password } = req.body;
+    const userExist = users.find((user) => user.email === email);
+    if (userExist)
+      return res.send({ status: "error", message: "el usuario ya existe" });
 
-  users.push();
-  const token = generateToken(newUser);
+    users.push({ username, first_name, last_name, email, password });
+    console.log(users);
 
-  res.send({
-    status: "success",
-    message: "usuario creado",
-    token,
-  });
-  // try {
-  //   const { username, first_name, last_name, email, password } = req.body;
+    const token = generateToken({
+      username,
+      email,
+      role: "user",
+    });
+    console.log(token);
 
-  //   const exist = await userModel.findOne({ email });
-  //   if (exist) return res.send({ status: "error", message: "ya existe el usuario" });
-
-  //   const passwordHash = createHash(password)
-  //   console.log({passwordHash})
-
-  //   const newUser = {
-  //     username,
-  //     first_name,
-  //     last_name,
-  //     email,
-  //     password: passwordHash,
-  //   };
-
-  //   await userModel.create(newUser);
-  //   res.status(200).render("login");
-
-  // } catch (error) {
-  //   console.log(error);
-  // }
+    res.status(200).send({
+      status: "success",
+      message: "usuario creado",
+      token,
+    });
+    //await userModel.create(users);
+    // res.status(200).render("login")
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get("/github", passport.authenticate("github"));
