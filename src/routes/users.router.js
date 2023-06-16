@@ -21,8 +21,6 @@ router.get('/', authToken, async (req, res) =>{
             return res.status(400).send('No hay usuarios')            
         }
         res.status(200).send({
-            // status: 'success'
-            //payload: docs
             users: docs,
             hasPrevPage,
             prevPage,
@@ -88,5 +86,4 @@ router.delete('/:uid', async (req, res)=> {
 })
 
 module.exports = router
-// export default router
 

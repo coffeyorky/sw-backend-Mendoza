@@ -3,7 +3,7 @@ const { userModel } = require("../models/user.model.js");
 const { createHash, checkValidPassword } = require("../utils/brcyptPass.js");
 const passport = require("passport");
 const { generateToken, authToken } = require("../utils/jsonwebtoken.js");
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 
 const router = Router();
 
@@ -23,32 +23,29 @@ router.get("/", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
-  // const user = users.find((user) => user.email === email && user.password === password);
+  
   if (email !== "rex@rex" || password !== "rex") {
     return res.status(401).send({
       status: "error",
       message: "revisar usuario y contraseña",
     });
   }
-  let token = jwt.sign({ email, password }, "CoderS3cR3tQ@", { expiresIn: "24h" });
+  let token = jwt.sign({ email, password }, 'CoderS3cR3t@', {
+    expiresIn: "24h",
+  });
 
-  res.cookie("coderCookie", token, { 
-       maxAge: 60 * 60 * 1000,
-       httpOnly: true
-     })
-    .status(200).send({
+  res
+    .cookie("coderCookie", token, {
+      maxAge: 60*60*1000,
+      httpOnly: true,
+    })
+    .status(200)
+    .send({
       status: "success",
       message: "Login in successfully",
       token,
     });
 });
-
-// router.get("/current", authToken, (req, res) => {
-//   res.send({
-//     status: "success",
-//     payload: req.user,
-//   });
-// });
 
 router.get("/register", (req, res) => {
   res.render("register");

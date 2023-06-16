@@ -82,10 +82,16 @@ Content-Type: application/json
     "first_name": "rex",
     "last_name": "rex",
     "password": "rex",
-    "email": "rex@ani"
+    "email": "rex@rex"
 }
 
 ###
 GET http://localhost:8080/api/usuarios
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4NjM3MzgzNSwiZXhwIjoxNjg2NDYwMjM1fQ.Nf5josIgwrIr569JqTza9llMmLHCjsN6AFkEPR0yuYc
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4Njc3NTg2NSwiZXhwIjoxNjg2ODYyMjY1fQ.YX2MTYYhSwkVz8qmKTn8gg44Nex5dwf6gvWpLwxudgI
+
+###
+GET http://localhost:8080/pruebas/current
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4Njc3NTg2NSwiZXhwIjoxNjg2ODYyMjY1fQ.YX2MTYYhSwkVz8qmKTn8gg44Nex5dwf6gvWpLwxudgI
+

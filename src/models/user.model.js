@@ -6,8 +6,10 @@ const collection = "usuarios";
 const UserSchema = new Schema({
   username: {
     type: String,
-    unique: true
-  },
+    unique: true,
+    required: true
+}
+,
   first_name: {
     type: String,
     index: true,
@@ -31,7 +33,6 @@ const UserSchema = new Schema({
 UserSchema.plugin(mongoosePaginate)
 const userModel = model(collection, UserSchema)
 
-
 module.exports = {
-  userModel,
+  userModel
 };

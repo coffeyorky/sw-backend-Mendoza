@@ -5,8 +5,6 @@ const authSession = (req, res, next)=>{
     next()
 }
 
-
-
 module.exports = {
     authSession
 }
