@@ -30,7 +30,7 @@ router.post("/login", (req, res) => {
       message: "revisar usuario y contraseña",
     });
   }
-  let token = jwt.sign({ email, password }, 'CoderS3cR3t@', {
+  let token = jwt.sign({ email, password, role:"user_premium" }, 'CoderS3cR3t@', {
     expiresIn: "24h",
   });
 

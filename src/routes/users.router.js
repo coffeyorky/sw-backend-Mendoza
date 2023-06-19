@@ -34,8 +34,13 @@ router.get('/', authToken, async (req, res) =>{
 
 // get http://localhost:8080/api/usuarios /id
 router.get('/:id', (request, response) =>{
+    try {
     const {id} = request.params
-    response.status(200).send(id)
+    response.status(200).send(id)        
+    } catch (error) {
+        console.log(error)
+    }
+
 })
 
 
@@ -63,7 +68,7 @@ router.post('/', async (request, response) =>{
 
 // PUT http://localhost:8080/api/usuarios /:userId
 router.put('/:uid', async (request, response) =>{
-
+    try {
     const { uid } = request.params
     let userToReplace = request.body
     if (!userToReplace.first_name || !userToReplace.last_name || !userToReplace.email) {
@@ -73,16 +78,25 @@ router.put('/:uid', async (request, response) =>{
     response.status(201).send({ 
         users: result,
         message: 'usuario Modificado' 
-    })
+    })        
+    } catch (error) {
+        console.log(error) 
+    }
+
 })
 
 // DELETE http://localhost:8080/api/usuarios /:userId
 router.delete('/:uid', async (req, res)=> {
-    const { uid } = req.params
+    try {
+     const { uid } = req.params
 
     let result = await usersManager.deletUser(uid)
     
-    res.status(200).send({ message:"Usuario borrado", result })
+    res.status(200).send({ message:"Usuario borrado", result })       
+    } catch (error) {
+        console.log(error)
+    }
+
 })
 
 module.exports = router

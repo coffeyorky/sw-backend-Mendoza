@@ -7,15 +7,17 @@ const CartSchema = new Schema({
         product: {
             type: Schema.Types.ObjectId,
             ref: 'productos'
-        }
-        // quantity : {}
+        },
+        quantity : Number
     }]
 })
 
- CartSchema.pre('find', function(){
+ CartSchema.pre('findOne', function(){
      this.populate('products.product')
  })
 
+ const cartModel = model(collection, CartSchema)
 
-
-module.exports = model(collection, CartSchema)
+module.exports = {
+    cartModel
+}

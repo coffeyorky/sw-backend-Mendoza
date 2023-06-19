@@ -1,16 +1,15 @@
 const { Router } = require("express");
 const cartManager = require("../dao/cartManagerMongo");
+const { cartModel } = require("../models/carts.model");
 
 const router = Router()
 
-router.get("/", async (req, res) => {
-  const resp = await cartManager.getCart();
+router.get("/:cid", async (req, res) => {
+  const {cid}= req.params
+  const resp = await cartModel.findOne({});
   res.send(resp);
 });
 
-router.get("/:cid", async (req, res) => {
-  res.send("get cart by id");
-});
 
 router.post("/", async (req, res) => {
   try {
@@ -31,6 +30,7 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:cid", async (req, res) => {
+  try {
   const { cid } = req.params;
 
   let cartToReplace = req.body;
@@ -43,13 +43,22 @@ router.put("/:cid", async (req, res) => {
   res.status(201).send({
     users: result,
     message: "Carrito Modificado",
-  });
+  });    
+  } catch (error) {
+    console.log(error)
+  }
+
 });
 
 router.delete("/:cid", async (req, res) => {
+  try {
   const { cid } = req.params;
   let result = await cartManager.deleteCart(cid);
-  res.status(200).send({ message: "Carrito borrado", result });
+  res.status(200).send({ message: "Carrito borrado", result });    
+  } catch (error) {
+    console.log(error)
+  }
+
 });
 
 module.exports = router;

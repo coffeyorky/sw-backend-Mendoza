@@ -1,8 +1,8 @@
-const  productModel  = require("../models/products.model.js");
+const  {productModel}  = require("../models/products.model.js");
 
 class ProductManagerMongo {
-  async getProduct({page, limit }) {
-    const resp = await productModel.paginate({}, {limit, page, lean:true})
+  async getProduct(limit, page) {
+    let resp = await productModel.paginate({}, {limit, page, lean:true})
     console.log(resp)
     return resp
   }

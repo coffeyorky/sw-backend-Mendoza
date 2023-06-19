@@ -75,7 +75,6 @@ const prodArray = [
 ]
 
 router.get("/", async (req, res) => {
-
   let allProducts = await productos.readProducts()
       res.render("home", {
           title: "Express Avanzado | Handlebars",
