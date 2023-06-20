@@ -6,8 +6,8 @@ class CartManagerMongo {
     console.log(resp)
     return resp
   }
-  async getCartById(cid) {
-    return "get PRODUCTOS";
+  async getCartById(id) {
+   return await cartsModel.findById({_id: id})
   }
   async addCart(newCart) {
     return await cartsModel.create(newCart);

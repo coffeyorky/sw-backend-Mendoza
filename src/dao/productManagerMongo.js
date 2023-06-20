@@ -1,24 +1,24 @@
 const  {productModel}  = require("../models/products.model.js");
 
 class ProductManagerMongo {
-  async getProduct(limit, page) {
+  getProduct = async ({page, limit, query=""}) => {
     let resp = await productModel.paginate({}, {limit, page, lean:true})
     console.log(resp)
     return resp
   }
-  async getProductsById(pid) {
-    return "get PRODUCTOS";
+   getProductsById = async (id) =>{
+    return await productModel.findById({_id: id})
   }
-  async addProduct(newProduct) {
+  addProduct = async (newProduct) => {
     return await productModel.create(newProduct);
   }
-  async updateProduct(pid, productToReplace) {
+  updateProduct = async (pid, productToReplace) => {
     return await productModel.updateOne({_id: pid}, productToReplace)
   }
-  async deleteProduct(pid) {
+  deleteProduct = async (pid) => {
     return await productModel.deleteOne({_id: pid})
   }
 
 }
 
-module.exports = new ProductManagerMongo();
+module.exports = ProductManagerMongo 

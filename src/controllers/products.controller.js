@@ -1,28 +1,34 @@
-
-const productManager = require("../dao/productManagerMongo");
+const { prodService } = require("../service");
 const { authSession } = require("../middleware/auth.middleware");
+const { authToken } = require("../utils/jsonwebtoken")
+
 
 class ProductController {
   getProducts = async (req, res) => {
     try {
-     const { page = 4, limit=10 } = req.query;
-     const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
-       await productManager.getProduct({ page, limit });
-     if (!docs) {
-       return res.status(400).send("no hay productos");
-     }
-     res.status(200).render(`product`, {
-       products: docs,
-       hasPrevPage,
-       prevPage,
-       hasNextPage,
-       nextPage
-      });   
-      console.log(render)
-  } catch (error) {
-      console.log(error)
-  }
-
+      const { page = 4, limit = 10 } = req.query;
+      const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
+        await prodService.getProduct({ page, limit });
+      if (!docs) {
+        return res.status(400).send("no hay productos");
+      }
+      res.status(200).send({
+        products: docs,
+        hasPrevPage,
+        prevPage,
+        hasNextPage,
+        nextPage,
+      });
+      //  res.status(200).render(`product`, {
+      //    products: docs,
+      //    hasPrevPage,
+      //    prevPage,
+      //    hasNextPage,
+      //    nextPage
+      //   });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   getProduct = async (req, res) => {
@@ -40,7 +46,7 @@ class ProductController {
       if (!title || !thumbnail) {
         return res.status(400).send({ message: "pasar todos los datos" });
       }
-      let prodAgregado = await productManager.addProduct({
+      let prodAgregado = await prodService.addProduct({
         title,
         description,
         price,
@@ -71,7 +77,7 @@ class ProductController {
       ) {
         return res.status(400).send({ message: "pasar todos los datos" });
       }
-      let result = await productManager.updateProduct(pid, productToReplace);
+      let result = await prodService.updateProduct(pid, productToReplace);
       res.status(201).send({
         users: result,
         message: "Producto Modificado",
@@ -84,7 +90,7 @@ class ProductController {
   deleteProduct = async (req, res) => {
     try {
       const { pid } = req.params;
-      let result = await productManager.deleteProduct(pid);
+      let result = await prodService.deleteProduct(pid);
       res.status(200).send({ message: "Producto borrado", result });
     } catch (error) {
       console.log(error);
@@ -92,4 +98,4 @@ class ProductController {
   };
 }
 
-module.exports = ProductController;
+module.exports = new ProductController;

@@ -14,47 +14,25 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const FileStore = require("session-file-store");
 
-const fileStorege = FileStore(session);
+const { Server } = require('socket.io')
+const { initSocket } = require('./utils/initSocker.js')
 const { create } = require("connect-mongo");
 const { initializePassport } = require("./passport-jwt/passport.config");
 const passport = require("passport");
 // const { processFunction } = require("./utils/process.js");
 require("dotenv").config()
 
-configObje.connectDB();
+configObje.dbConnection();
+// configObje.dbConnection();
 
 const app = express();
-const PORT = configObje.port
+const PORT = process.env.PORT || 8080
 //console.log(configObje)
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser('CoderS3cR3t@'));
-// app.use(session({
-//   store: new MongoStorege({
-//     ttl: 100000000000,
-//     retries: 3,
-//     path: __dirname+`/fileSession`
-//   }),
-//   secret: "secretCoder",
-//   resave: true,
-//   saveUninitialized: true
-// }))
-
-// app.use(session({
-//   store: create({
-//     mongoUrl: objConfig.url,
-//     mongoOptions: {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true
-//       },
-//       ttl: 100000000*24
-//   }),
-//   secret: "secretCoder",
-//   resave: true,
-//   saveUninitialized: true
-// }))
 
 initializePassport();
 app.use(passport.initialize());
@@ -86,9 +64,17 @@ app.use("/pruebas", testRouter);
 const usRouter = new UserRouter()
 app.use("/users", usRouter.getRouter())
 
-app.listen(PORT, (err) => {
-  if (err) {
-    console.log(err);
-  }
-  console.log(`Servidor Expres puerto ${PORT}`);
-});
+// app.listen(PORT, (err) => {
+//   if (err) {
+//     console.log(err);
+//   }
+//   console.log(`Servidor Expres puerto ${PORT}`);
+// });
+const httpServer = app.listen(PORT,err =>{
+  if (err)  console.log(err)
+  console.log(`Escuchando en el puerto: ${PORT}`)
+})
+
+
+const io = new Server(httpServer)
+initSocket(io)

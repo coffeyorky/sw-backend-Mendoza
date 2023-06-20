@@ -1,4 +1,28 @@
+// const { ordenes } = require("./ordenes");
+// const productsModel = require("../models/products.model");
 
+//  const insertProducts = async() =>{
+    //      const result = await productsModel.insertMany(ordenes)
+    //      console.log(result)
+    //  }
+    //  insertProducts()
+    //  const product = await productsModel.aggregate([
+    //    {
+    //      $match: {category: `figuras`}
+    //    },
+    //    {
+    //      $group: {_id: `figuras`, promedio: {$avg: `$price`}}
+    //    }
+    //  {
+    //     $sort: {_id: 1}
+    //  }
+    //   {
+    //      $merge: {
+    //       into: "reports"
+    //     }
+    //   }
+    //  ])
+    //   console.log(product)
 const ordenes = [
     {
         title: "Remera Bad batch",
