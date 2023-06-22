@@ -1,15 +1,17 @@
 const express = require("express");
+const cors = require("cors")
 const routerApp = require("./routes");
 const ProductRou = require("./routes/productos.routes.js");
 const CartRouter = require("./routes/carts.routes.js");
 const viewsRouter = require("./routes/allProduct.routes.js");
 const cookieRouter = require("./routes/cookie.router.js");
 const sessionRouter = require("./routes/session.router.js");
+const ordersRouter = require("./routes/orders.router.js");
 const { UserRouter } = require("./routes/user.js");
 const usersRouter = require("./routes/users.router.js");
 const testRouter = require("./routes/pruebas.router.js");
 const handlebars = require("express-handlebars");
-const configObje = require("./config/config.js");
+const {configObje} = require("./config/config.js");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const FileStore = require("session-file-store");
@@ -33,6 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cookieParser('CoderS3cR3t@'));
+app.use(cors())
 
 initializePassport();
 app.use(passport.initialize());
@@ -58,6 +61,8 @@ app.use("/", viewsRouter);
 app.use("/api/producto", ProductRou);
 app.use("/api/carts", CartRouter);
 app.use("/api/usuarios", usersRouter);
+app.use("/api/ordenes", ordersRouter);
+
 
 app.use("/pruebas", testRouter);
 

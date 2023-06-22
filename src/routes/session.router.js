@@ -1,10 +1,11 @@
 const { Router } = require("express");
-const { userModel } = require("../models/user.model.js");
 const { createHash, checkValidPassword } = require("../utils/brcyptPass.js");
 const passport = require("passport");
 const { generateToken, authToken } = require("../utils/jsonwebtoken.js");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const UserDaoMongo = require("../dao/mongo/user.mongo");
 
+const userDaoMongo = new UserDaoMongo()
 const router = Router();
 
 const users = [
@@ -97,7 +98,7 @@ router.get("/failregister", (req, res) => {
 
 router.put("/recoverypass", async (req, res) => {
   const { email, password } = req.body;
-  const user = await userModel.findOne({ email });
+  const user = await userDaoMongo.findOne({ email });
   if (!user)
     return res
       .status(401)

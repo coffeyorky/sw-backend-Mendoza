@@ -4,10 +4,12 @@ class MongoSingleton {
   static #instance;
   constructor() {
     connect(
-      "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority", {
-     useNewUrlParser: true,
-    useUnifiedTopology: true       
-      })
+      "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority",
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    );
   }
 
   static getInstance() {

@@ -1,14 +1,16 @@
 const { prodService } = require("../service");
 const { authSession } = require("../middleware/auth.middleware");
-const { authToken } = require("../utils/jsonwebtoken")
+const { authToken } = require("../utils/jsonwebtoken");
+const ProductDaoMongo = require("../dao/mongo/products.mongo");
 
+const prodDaoMongo = new ProductDaoMongo()
 
 class ProductController {
   getProducts = async (req, res) => {
     try {
       const { page = 4, limit = 10 } = req.query;
       const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
-        await prodService.getProduct({ page, limit });
+        await prodService.getProducts({ page, limit });
       if (!docs) {
         return res.status(400).send("no hay productos");
       }
@@ -31,6 +33,14 @@ class ProductController {
     }
   };
 
+  get = async (req, res) => {
+    const products = await prodDaoMongo.getProduct()
+    res.status(200).send({
+      status: "success",
+      products
+    })
+  }
+
   getProduct = async (req, res) => {
     try {
       res.send("get product by id");
@@ -46,7 +56,7 @@ class ProductController {
       if (!title || !thumbnail) {
         return res.status(400).send({ message: "pasar todos los datos" });
       }
-      let prodAgregado = await prodService.addProduct({
+      let prodAgregado = await prodService.createProduct({
         title,
         description,
         price,
@@ -77,7 +87,7 @@ class ProductController {
       ) {
         return res.status(400).send({ message: "pasar todos los datos" });
       }
-      let result = await prodService.updateProduct(pid, productToReplace);
+      let result = await prodService.updateProd(pid, productToReplace);
       res.status(201).send({
         users: result,
         message: "Producto Modificado",

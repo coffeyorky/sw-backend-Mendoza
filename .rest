@@ -95,3 +95,17 @@ GET http://localhost:8080/pruebas/current
 Content-Type: application/json
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4Njc3NTg2NSwiZXhwIjoxNjg2ODYyMjY1fQ.YX2MTYYhSwkVz8qmKTn8gg44Nex5dwf6gvWpLwxudgI
 
+###
+GET http://localhost:8080/api/ordenes
+
+###
+GET http://localhost:8080/api/ordenes
+Content-Type: application/json
+
+{
+    "user": "ani",
+    "products": [{
+        "product": "web"
+    }],
+    "total": 1500
+}

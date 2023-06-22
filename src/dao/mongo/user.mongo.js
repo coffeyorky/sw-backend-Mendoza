@@ -1,9 +1,6 @@
-const { userModel } = require("../models/user.model")
+const { userModel } = require("../../models/user.model")
 
-class UserManagerMongo{
-    // constructor(){
-    //     this.products = []
-    // }
+class UserDaoMongo {
     get = async ({page, limit, query=""}) =>  {
         const resp = await userModel.paginate({}, {limit, page, lean: true})
         console.log(resp)
@@ -30,5 +27,5 @@ class UserManagerMongo{
 }
 
 
-module.exports = { UserManagerMongo }
+module.exports =  UserDaoMongo 
 
