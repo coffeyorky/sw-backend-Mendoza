@@ -1,10 +1,61 @@
 const { Router } = require("express");
-const passport = require("passport");
-const { passportCall } = require("../passport-jwt/passportcall");
-const { authorization } = require("../passport-jwt/authorization.middleware");
-const { fork } = require('child_process')
+ const passport = require("passport");
+ const { passportCall } = require("../passport-jwt/passportcall");
+ const { authorization } = require("../passport-jwt/authorization.middleware");
+ const { fork } = require('child_process');
+const { sendMailTransport } = require("../utils/nodemailer");
+const { sendSms } = require("../utils/sendSmsTwilio");
+const { generateUser } = require("../utils/fakerGenerate");
+const compression = require("express-compression");
 
 const router = Router();
+
+router.use(compression({
+  brotli: {
+    enablred: true, 
+    xlib: {}
+  }
+}))
+
+router.get("/comp", compression(), (req, res) => {
+  let string = "string"
+  for (let i = 0; i < 5e4; i++) {
+    string += "bode akuna"
+  }
+  res.send(string)
+})
+
+router.get("/user", async(req, res) =>{
+  try {
+    let users = []
+    for(let i = 0; i <10; i ++) {
+      users.push(generateUser())
+    }
+    res.send({
+      status: "success",
+      payload: users
+    })
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+router.get("/email", async (req, res)=>{
+  try {
+    await sendMailTransport()
+    res.send("email enviado")
+  } catch (error) {
+    console.log(error)
+  }
+})
+router.get("/sms", async (req, res)=>{
+  try {
+    await sendSms("Esto es un sms de prueba")
+    res.send("sms enviado")
+  } catch (error) {
+    console.log(error)
+  }
+})
 
 // router.get(
 //   "/current",
@@ -39,27 +90,27 @@ const router = Router();
 
 //childProcess
 
-const operacionCompleja = (params) => {
-  let result = 0
-  for (let i = 0; i < 10e9; i++) {
-      result += 1
+// const operacionCompleja = (params) => {
+//   let result = 0
+//   for (let i = 0; i < 10e9; i++) {
+//       result += 1
       
-  }
-  return result
-} 
+//   }
+//   return result
+// } 
 
-router.get('/complejaBlock', (req,res) => {
-  const result = operacionCompleja()
-  res.send(`<center><h1>El resultado es ${result}</h1></center>`)
-})
+// router.get('/complejaBlock', (req,res) => {
+//   const result = operacionCompleja()
+//   res.send(`<center><h1>El resultado es ${result}</h1></center>`)
+// })
 
-router.get('/compNoBlock', (req,res) => {
-  const child = fork('./src/utils/operacionC.js')
-  child.send('inicia el cáclulo por favor')
-  child.on('message', result => {        
-      res.send(`<center><h1>El resultado es ${result}</h1></center>`)
-  })
-})
+// router.get('/compNoBlock', (req,res) => {
+//   const child = fork('./src/utils/operacionC.js')
+//   child.send('inicia el cáclulo por favor')
+//   child.on('message', result => {        
+//       res.send(`<center><h1>El resultado es ${result}</h1></center>`)
+//   })
+// })
 
 
 module.exports = router;

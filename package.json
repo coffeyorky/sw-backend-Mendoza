@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/coffeyorky/sw-backend-Mendoza#readme",
   "dependencies": {
+    "@faker-js/faker": "^7.4.0",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.3",
     "commander": "^11.0.0",
@@ -28,6 +29,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-compression": "^1.0.2",
     "express-handlebars": "^7.0.4",
     "express-session": "^1.17.3",
     "jsonwebtoken": "^9.0.0",
@@ -35,6 +37,7 @@
     "mongoose-paginate-v2": "^1.7.1",
     "multer": "^1.4.5-lts.1",
     "nanoid": "^4.0.2",
+    "nodemailer": "^6.9.3",
     "nodemon": "^2.0.22",
     "passport": "^0.6.0",
     "passport-github2": "^0.1.12",
@@ -42,6 +45,8 @@
     "passport-local": "^1.0.0",
     "react-bootstrap": "^2.7.4",
     "session-file-store": "^1.5.0",
-    "socket.io": "^4.6.1"
+    "socket.io": "^4.6.1",
+    "twilio": "^4.12.0",
+    "winston": "^3.9.0"
   }
 }

@@ -5,7 +5,7 @@ const { authToken } = require("../utils/jsonwebtoken")
 const router = Router()
 
 // get http://localhost:8080/api/usuarios
-router.get('/', authToken, getUsers)
+router.get('/', getUsers)
 router.get('/:id', getUser)
 router.post('/', createUser)
 router.put('/:uid', updateUser)

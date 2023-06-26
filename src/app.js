@@ -21,6 +21,7 @@ const { initSocket } = require('./utils/initSocker.js')
 const { create } = require("connect-mongo");
 const { initializePassport } = require("./passport-jwt/passport.config");
 const passport = require("passport");
+const { addLogger, logger } = require("./utils/logger");
 // const { processFunction } = require("./utils/process.js");
 require("dotenv").config()
 
@@ -44,6 +45,7 @@ app.use(passport.initialize());
 // processFunction()
 
 app.use(routerApp);
+app.use(addLogger)
 
 app.use(express.static("public"));
 
@@ -77,7 +79,7 @@ app.use("/users", usRouter.getRouter())
 // });
 const httpServer = app.listen(PORT,err =>{
   if (err)  console.log(err)
-  console.log(`Escuchando en el puerto: ${PORT}`)
+  logger.info(`Escuchando en el puerto: ${PORT}`)
 })
 
 

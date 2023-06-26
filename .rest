@@ -86,6 +86,16 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:8080/api/usuarios
+Content-Type: application/json
+
+{
+    "first_name": "bode",
+    "last_name": "akuna",
+    "email": "kat@kat"
+}
+
+###
 GET http://localhost:8080/api/usuarios
 Content-Type: application/json
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4Njc3NTg2NSwiZXhwIjoxNjg2ODYyMjY1fQ.YX2MTYYhSwkVz8qmKTn8gg44Nex5dwf6gvWpLwxudgI

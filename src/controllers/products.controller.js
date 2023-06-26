@@ -29,7 +29,7 @@ class ProductController {
       //    nextPage
       //   });
     } catch (error) {
-      console.log(error);
+      req.logger.error(error)
     }
   };
 
@@ -45,7 +45,7 @@ class ProductController {
     try {
       res.send("get product by id");
     } catch (error) {
-      console.log(error);
+      req.logger.error(error)
     }
   };
 
@@ -70,7 +70,7 @@ class ProductController {
         message: "producto creado",
       });
     } catch (error) {
-      console.log(error);
+      req.logger.error(error)
     }
   };
 
@@ -93,7 +93,7 @@ class ProductController {
         message: "Producto Modificado",
       });
     } catch (error) {
-      console.log(error);
+      req.logger.error(error)
     }
   };
 
@@ -103,7 +103,7 @@ class ProductController {
       let result = await prodService.deleteProduct(pid);
       res.status(200).send({ message: "Producto borrado", result });
     } catch (error) {
-      console.log(error);
+      req.logger.error(error)
     }
   };
 }

@@ -1,6 +1,12 @@
 const { usersService } = require("../service");
 const UserDto = require('../dto/user.dto')
 const UserDaoMongo = require("../dao/mongo/products.mongo");
+const CustomeError = require("../utils/errors/CustomError");
+const EErrors = require("../utils/errors/EErrors");
+const { generateUserErrorInfo } = require("../utils/errors/info");
+const { logger } = require("../utils/logger");
+
+const users = []
 
 class UserController {
     getUsers = async (req, res) =>{
@@ -16,7 +22,7 @@ class UserController {
             if (!docs) {
                 return res.status(400).send('No hay usuarios')            
             }
-            res.status(200).send({
+            res.status(200).render({
                 users: docs,
                 hasPrevPage,
                 prevPage,
@@ -24,7 +30,7 @@ class UserController {
                 nextPage
             })
         } catch (error) {
-            console.log(error)
+            req.logger.error(error)
         }
     }
     getUser = async (req, res) =>{
@@ -32,22 +38,32 @@ class UserController {
         res.status(200).send(id)
 
     }
-    createUser = async (req, res) =>{
+    createUser = async (req, res, next) =>{
         try {
-            let {first_name, last_name} = request.body
-            if (!first_name || !last_name) {
-                return response.status(400).send({ message: 'Che pasar todos los datos'})
+            let {first_name, last_name, email, edad} = req.body
+            if (!first_name || !last_name ||!email) {
+
+                CustomeError.createError({
+                    name: "User creation error",
+                    cause: generateUserErrorInfo({first_name, last_name, email}),
+                    message: "Error trying to created user",
+                    code: EErrors.INVALID_TYPE_ERROR
+                })
+
+                //return response.status(400).send({ message: 'Che pasar todos los datos'})
             }
     
-            let userAgregado = await usersService.createUser({first_name, last_name})
+            //let userAgregado = await usersService.createUser({first_name, last_name})
+            let userAgregado = users.push({first_name, last_name, email})
             // console.log(userAgregado)
     
-            response.status(201).send({ 
+            res.status(201).send({ 
+                users,
                 userAgregado,
                 message: 'usuario creado' 
             })  
         } catch (error) {
-            console.log(error)
+            next(error)
         }
     }
     updateUser = async (req, res) =>{
@@ -63,7 +79,7 @@ class UserController {
                 message: 'usuario Modificado' 
             })        
             } catch (error) {
-                console.log(error) 
+                req.logger.error(error)
             }
     }
 
@@ -75,10 +91,11 @@ class UserController {
            
            res.status(200).send({ message:"Usuario borrado", result })       
            } catch (error) {
-               console.log(error)
+            req.logger.error(error)
            }
     }
 }
+
 
 
 
