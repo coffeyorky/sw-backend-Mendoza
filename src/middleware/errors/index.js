@@ -1,7 +1,8 @@
-const { EErrors } = require("../../utils/errors/EErrors")
+const { EErrors } = require("../../utils/errors/EErrors");
+const { logger } = require("../../utils/logger");
 
 module.exports = (error, req, res, next) => {
-    console.log(error.causa)
+    logger.info(error.causa)
     switch (error.code) {
         case EErrors.INVALID_TYPE_ERROR:
             res.send({status: "error", error: error.name})

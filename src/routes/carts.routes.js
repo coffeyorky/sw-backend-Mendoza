@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
       message: "producto creado",
     });
   } catch (error) {
-    console.log(error);
+    req.logger.error(error);
   }
 });
 
@@ -45,7 +45,7 @@ router.put("/:cid", async (req, res) => {
     message: "Carrito Modificado",
   });    
   } catch (error) {
-    console.log(error)
+    req.logger.error(error)
   }
 
 });
@@ -56,7 +56,7 @@ router.delete("/:cid", async (req, res) => {
   let result = await cartManager.deleteCart(cid);
   res.status(200).send({ message: "Carrito borrado", result });    
   } catch (error) {
-    console.log(error)
+    req.logger.error(error)
   }
 
 });

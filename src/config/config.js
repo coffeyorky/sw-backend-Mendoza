@@ -1,10 +1,11 @@
 const { connect } = require("mongoose");
 const { commander } = require("../utils/commander");
 const MongoSingleton = require("../utils/MongoSingleton");
+const { logger } = require("../utils/logger");
 require("dotenv").config()
 
 const { mode } = commander.opts();
-console.log(mode);
+logger.info(mode);
 
 // require('dotenv').config({
 //   path: mode === 'development' ? './.env.development':'./.env.production'

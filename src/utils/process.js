@@ -1,3 +1,5 @@
+const { logger } = require("./logger");
+
 // exports.processFunctin = () => {
 let processFunction = () => {
 //   console.log("cwd", process.cwd());
@@ -7,7 +9,7 @@ let processFunction = () => {
 
 //   console.log("version", process.version);
 //   console.log("argv", process.argv);
-  console.log("argv in las dos primeras", process.argv.slice(2));
+logger.info("argv in las dos primeras", process.argv.slice(2));
 };
 
 processFunction();
@@ -18,10 +20,10 @@ processFunction();
 // node process.js --mode development
 
 process.on('exit', code => {
-    console.log('ESte cód se ejecutara justo antes de salir del processo', code)
+  logger.info('ESte cód se ejecutara justo antes de salir del processo', code)
 })
 process.on('uncaughtException', exception => {
-    console.log('ESte cód atrapa todas las excepciones no controladas como una func no declarada', exception)
+  logger.info('ESte cód atrapa todas las excepciones no controladas como una func no declarada', exception)
 })
 
-console.log(exepcion())
+logger.info(exepcion())

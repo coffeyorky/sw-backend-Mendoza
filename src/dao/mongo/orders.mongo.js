@@ -12,7 +12,7 @@ class OrderDaoMongo {
         return await this.orderModel.findOne({_id: oid})
     }
     async create(newOrder){
-        console.log('dao',newOrder)
+        logger.info('dao',newOrder)
         return await this.orderModel.create(newOrder)
     }
     async update(oid){}

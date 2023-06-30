@@ -1,4 +1,5 @@
 const { Router } = require("express");
+const { logger } = require("../utils/logger");
 
 class ClassRouter {
   constructor() {
@@ -17,7 +18,7 @@ class ClassRouter {
       try {
         await callback.apply(this, params);
       } catch (error) {
-        console.log(error);
+        req.logger.error(error);
         params[1].status(500).send(error);
       }
     });
@@ -39,9 +40,9 @@ class ClassRouter {
         .send({ status: "error", error: "Not Authenticated" });
 
     const token = authHeader.split(" ")[1];
-    console.log(token);
+    logger.info(token);
     let user = jwt.verify(token, "CoderS3cR3t@");
-    console.log(user);
+    logger.info(user);
     if (!policies.includes(user.role.toUpperCase()))
       return res.status(403).send({ status: "error", error: "Not permission" });
 

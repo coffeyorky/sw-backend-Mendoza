@@ -1,9 +1,10 @@
 const  cartsModel  = require("../../models/carts.model.js");
+const { logger } = require("../../utils/logger.js");
 
 class CartManagerMongo {
   async getCart() {
     const resp = await cartsModel.find()
-    console.log(resp)
+    logger.info(resp)
     return resp
   }
   async getCartById(id) {

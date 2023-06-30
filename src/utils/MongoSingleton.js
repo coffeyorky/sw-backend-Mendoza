@@ -1,4 +1,5 @@
 const { connect } = require("mongoose");
+const { logger } = require("./logger");
 
 class MongoSingleton {
   static #instance;
@@ -14,11 +15,11 @@ class MongoSingleton {
 
   static getInstance() {
     if (this.#instance) {
-      console.log("esta conectada");
+      logger.info("esta conectada");
       return this.#instance;
     }
     this.#instance = new MongoSingleton();
-    console.log("connected");
+    logger.info("connected");
     return this.#instance;
   }
 }

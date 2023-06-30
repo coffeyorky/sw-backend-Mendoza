@@ -1,11 +1,13 @@
-console.log("estamos aca")
+const { logger } = require("../../utils/logger")
+
+logger.info("estamos aca")
 
 const form = document.querySelector("#login")
 form.addEventListener("submit", (e) =>{
     e.preventDefault()
 
     const data = new FormData(form)
-    console.log(data)
+    logger.info(data)
     const obj = {}
     data.forEach((value, key) => obj[key] = value)
 
@@ -20,13 +22,13 @@ form.addEventListener("submit", (e) =>{
         return respuesta.json()
     })
     .then(respuesta => {
-        console.log(respuesta.token)
+        logger.info(respuesta.token)
         localStorage.setItem("token", respuesta.token)
         
     })
 })
 
 const getCookie = () => {
-    console.log(document.cookie)
+    logger.info(document.cookie)
 }
 

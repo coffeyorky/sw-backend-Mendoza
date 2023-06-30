@@ -52,7 +52,7 @@ router.get("/user", async(req, res) =>{
       payload: users
     })
   } catch (error) {
-    console.log(error)
+    req.logger.error(error)
   }
 })
 
@@ -61,7 +61,7 @@ router.get("/email", async (req, res)=>{
     await sendMailTransport()
     res.send("email enviado")
   } catch (error) {
-    console.log(error)
+    req.logger.error(error)
   }
 })
 router.get("/sms", async (req, res)=>{
@@ -69,7 +69,7 @@ router.get("/sms", async (req, res)=>{
     await sendSms("Esto es un sms de prueba")
     res.send("sms enviado")
   } catch (error) {
-    console.log(error)
+    req.logger.error(error)
   }
 })
 

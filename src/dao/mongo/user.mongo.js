@@ -1,9 +1,10 @@
 const { userModel } = require("../../models/user.model")
+const { logger } = require("../../utils/logger")
 
 class UserDaoMongo {
     get = async ({page, limit, query=""}) =>  {
         const resp = await userModel.paginate({}, {limit, page, lean: true})
-        console.log(resp)
+        logger.info(resp)
         return resp
     }
 

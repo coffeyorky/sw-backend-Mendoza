@@ -5,7 +5,8 @@ const { generateToken, authToken } = require("../utils/jsonwebtoken.js");
 const jwt = require("jsonwebtoken");
 const UserDaoMongo = require("../dao/mongo/user.mongo");
 const { userModel } = require("../models/user.model.js");
-const { faker } = require("@faker-js/faker")
+const { faker } = require("@faker-js/faker");
+const { logger } = require("../utils/logger.js");
 
 const userDaoMongo = new UserDaoMongo();
 const router = Router();
@@ -53,7 +54,7 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
-    console.log(user);
+    logger.info(user);
     if (!user) {
       return res.send({
         status: "error",
@@ -62,13 +63,13 @@ router.post("/login", async (req, res) => {
     }
 
     const isValid = isValidPassword(user, password);
-    console.log(isValid);
+    logger.info(isValid);
     if (!isValid)
       return res.status(401).send({
         status: "error",
         message: "revisar usuario y contraseña",
       });
-    console.log("logged in!");
+      logger.info("logged in!");
 
     res.send({
       status: "success",
@@ -127,14 +128,14 @@ router.post("/register", async (req, res) => {
       email,
       password: hashedPassword,
     };
-    console.log(users);
+    logger.info(users);
     const resp = await userModel.create(newUser);
     const token = generateToken({
       username,
       email,
       role: "user",
     });
-    console.log(token);
+    logger.info(token);
 
     res.status(200).send({
       status: "success",
@@ -143,7 +144,7 @@ router.post("/register", async (req, res) => {
     });
     //res.status(200).render("login")
   } catch (error) {
-    console.log(error);
+    logger.info(error);
   }
 });
 

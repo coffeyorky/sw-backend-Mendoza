@@ -4,6 +4,8 @@
 //     return numero1 + numero2
 // }
 
+const { logger } = require("../src/utils/logger")
+
 // const suma = (...numeros) => {
 //     if(numeros.length===0) return 0
 //     let validInput = true
@@ -27,32 +29,32 @@ const suma = (...numeros) => {
 let testPasados = 0
 const TestTotales = 4
 
-console.log("debe devolver null si un parametro no es numerico")
+logger.info("debe devolver null si un parametro no es numerico")
 
 let resultTest = suma("2", 2)
 if(resultTest === null) {
-    console.log("test 1 pesado")
+    logger.info("test 1 pesado")
     testPasados++
-} else console.log(`Test 1 no pasado se recibio ${typeof resultTest}, pero se esperaba null`)
+} else logger.info(`Test 1 no pasado se recibio ${typeof resultTest}, pero se esperaba null`)
 
-console.log("la funcion debe devolver 0 sino paso parametros () 0")
+logger.info("la funcion debe devolver 0 sino paso parametros () 0")
 let resultTest2 = suma()
 if(resultTest2 === 0 ) {
-    console.log("test 2 paso")
+    logger.info("test 2 paso")
     testPasados++
-} else console.log(`Test 2 no pasado se recibio ${resultTest2}, pero se esperaba 0`)
+} else logger.info(`Test 2 no pasado se recibio ${resultTest2}, pero se esperaba 0`)
 
 let resultTest3 = suma(2,3)
 if(resultTest3 === 5 ) {
-    console.log("test 3 paso")
+    logger.info("test 3 paso")
     testPasados++
-} else console.log(`Test 3 no pasado se recibio ${resultTest3}, pero se esperaba 5`)
+} else logger.info(`Test 3 no pasado se recibio ${resultTest3}, pero se esperaba 5`)
 
 let resultTest4 = suma(1,2,3,4,5)
 if(resultTest4 === 15 ) {
-    console.log("test 4 paso")
+    logger.info("test 4 paso")
     testPasados++
-} else console.log(`Test 4 no pasado se recibio ${resultTest4}, pero se esperaba 5`)
+} else logger.info(`Test 4 no pasado se recibio ${resultTest4}, pero se esperaba 5`)
 
 
-console.log(`Paso ${testPasados} de ${TestTotales} test de pruebas`)
+logger.info(`Paso ${testPasados} de ${TestTotales} test de pruebas`)

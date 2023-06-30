@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { logger } = require("./logger");
 
 const PRIVATE_KEY = 'CoderS3cR3t@';
 
@@ -8,7 +9,7 @@ const generateToken = (user) => {
 
 const authToken = (req, res, next) => {
     const authHeader = req.headers['authorization']
-   console.log(authHeader)
+    logger.info(authHeader)
     if(!authHeader) return res.status(401).send({status: 'error', error: 'Not Authenticated'})
 
     const token = authHeader.split(' ')[1]

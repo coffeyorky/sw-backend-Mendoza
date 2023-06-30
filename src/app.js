@@ -78,7 +78,7 @@ app.use("/users", usRouter.getRouter())
 //   console.log(`Servidor Expres puerto ${PORT}`);
 // });
 exports.initServer = () => app.listen(PORT,err =>{
-  if (err)  console.log(err)
+  if (err)  logger.error(err)
   logger.info(`Escuchando en el puerto: ${8080}`)
 })
 

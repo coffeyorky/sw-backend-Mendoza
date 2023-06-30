@@ -1,4 +1,5 @@
  const { orderService } = require("../service")
+const { logger } = require("../utils/logger")
 
  class OrderController{
      async getOrders(req, res){
@@ -9,7 +10,7 @@
                  payload: orders
              })
          } catch (error) {
-             console.log(error)
+            req.logger.error(error)
          }
      }
      async getOrder(req, res){
@@ -21,20 +22,20 @@
                  payload: order
              })
          } catch (error) {
-            console.log(error)
+            req.logger.error(error)
          }
     }
     async createOrder(req, res){
         try {
             const {body} = req
-            console.log(body)
+            logger.info(body)
             const result = await orderService.createItem(body)
             res.status(200).send({
                  status: 'success', 
                 message: 'order created'
             })
         } catch (error) {
-             console.log(error)
+            req.logger.error(error)
          }
      }
      async updateOrder(req, res){}
