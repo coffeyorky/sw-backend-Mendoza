@@ -1,5 +1,5 @@
 const passport = require("passport");
-const { createHash, checkValidPassword } = require("../utils/brcyptPass");
+const { createHash } = require("../utils/brcyptPass");
 const LocalStrategy = require("passport-local").Strategy;
 const GitHudStrategy = require("passport-github2");
 const jwt = require("passport-jwt");

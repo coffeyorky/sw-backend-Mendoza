@@ -8,8 +8,7 @@ const UserSchema = new Schema({
     type: String,
     unique: true,
     required: true
-}
-,
+},
   first_name: {
     type: String,
     index: true,
@@ -22,12 +21,8 @@ const UserSchema = new Schema({
     unique: true,
     required: true,
   },
-  age: {
-    type: Number
-  },
-  password: {
-    type: String
-  },
+  password: String
+
 });
 
 UserSchema.plugin(mongoosePaginate)

@@ -1,11 +1,13 @@
 const { Router } = require("express");
-const { createHash, checkValidPassword } = require("../utils/brcyptPass.js");
+const { createHash, isValidPassword } = require("../utils/brcyptPass.js");
 const passport = require("passport");
 const { generateToken, authToken } = require("../utils/jsonwebtoken.js");
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const UserDaoMongo = require("../dao/mongo/user.mongo");
+const { userModel } = require("../models/user.model.js");
+const { faker } = require("@faker-js/faker")
 
-const userDaoMongo = new UserDaoMongo()
+const userDaoMongo = new UserDaoMongo();
 const router = Router();
 
 const users = [
@@ -22,46 +24,111 @@ router.get("/", (req, res) => {
   res.render("login", {});
 });
 
-router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  
-  if (email !== "rex@rex" || password !== "rex") {
-    return res.status(401).send({
-      status: "error",
-      message: "revisar usuario y contraseña",
-    });
-  }
-  let token = jwt.sign({ email, password, role:"user_premium" }, 'CoderS3cR3t@', {
-    expiresIn: "24h",
-  });
+// router.post("/login", (req, res) => {
+//   const { email, password } = req.body;
 
-  res
-    .cookie("coderCookie", token, {
-      maxAge: 60*60*1000,
-      httpOnly: true,
-    })
-    .status(200)
-    .send({
+//   if (email !== "rex@rex" || password !== "rex") {
+//     return res.status(401).send({
+//       status: "error",
+//       message: "revisar usuario y contraseña",
+//     });
+//   }
+//   let token = jwt.sign({ email, password, role:"user_premium" }, 'CoderS3cR3t@', {
+//     expiresIn: "24h",
+//   });
+//   res
+//     .cookie("coderCookie", token, {
+//       maxAge: 60*60*1000,
+//       httpOnly: true,
+//     })
+//     .status(200)
+//     .send({
+//       status: "success",
+//       message: "Login in successfully",
+//       token,
+//     });
+// });
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+    console.log(user);
+    if (!user) {
+      return res.send({
+        status: "error",
+        message: "revisar usuario y contraseña",
+      });
+    }
+
+    const isValid = isValidPassword(user, password);
+    console.log(isValid);
+    if (!isValid)
+      return res.status(401).send({
+        status: "error",
+        message: "revisar usuario y contraseña",
+      });
+    console.log("logged in!");
+
+    res.send({
       status: "success",
-      message: "Login in successfully",
-      token,
+      message: "login correcto",
     });
+  } catch (error) {
+    req.logger.error(error);
+  }
 });
 
 router.get("/register", (req, res) => {
   res.render("register");
 });
 
+// router.post("/register", async (req, res) => {
+//   try {
+//     const { username, first_name, last_name, email, password } = req.body;
+//     const userExist = users.find((user) => user.email === email);
+//     if (userExist)
+//       return res.send({ status: "error", message: "el usuario ya existe" });
+
+//     users.push({ username, first_name, last_name, email, password });
+
+//     const token = generateToken({
+//       username,
+//       email,
+//       role: "user",
+//     });
+//     console.log(token);
+
+//     res.status(200).send({
+//       status: "success",
+//       message: "usuario creado",
+//       token,
+//     });
+//     //await userModel.create(users);
+//     // res.status(200).render("login")
+//   } catch (error) {
+//     console.log(error);
+//   }
+// });
+
 router.post("/register", async (req, res) => {
   try {
     const { username, first_name, last_name, email, password } = req.body;
-    const userExist = users.find((user) => user.email === email);
+    const userExist = await userModel.findOne({ email });
     if (userExist)
-      return res.send({ status: "error", message: "el usuario ya existe" });
-
-    users.push({ username, first_name, last_name, email, password });
+      return res
+        .status(401)
+        .send({ status: "error", message: "el usuario ya existe" });
+    const hashedPassword = createHash(password);
+    const newUser = {
+      username,
+      first_name,
+      last_name,
+      email,
+      password: hashedPassword,
+    };
     console.log(users);
-
+    const resp = await userModel.create(newUser);
     const token = generateToken({
       username,
       email,
@@ -74,11 +141,24 @@ router.post("/register", async (req, res) => {
       message: "usuario creado",
       token,
     });
-    //await userModel.create(users);
-    // res.status(200).render("login")
+    //res.status(200).render("login")
   } catch (error) {
     console.log(error);
   }
+});
+
+router.get("/test/user", (req, res) => {
+  let first_name = faker.name.firstName();
+  let last_name = faker.name.lastName();
+  let email = faker.internet.email();
+  let password = faker.internet.password();
+
+  res.send({
+    first_name,
+    last_name,
+    email,
+    password,
+  });
 });
 
 router.get("/github", passport.authenticate("github"));

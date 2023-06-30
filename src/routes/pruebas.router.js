@@ -10,12 +10,28 @@ const compression = require("express-compression");
 
 const router = Router();
 
-router.use(compression({
-  brotli: {
-    enablred: true, 
-    xlib: {}
+router.get("/senc", (req, res) => {
+  let suma = 0
+  for (let index = 0; index < 100000; index++) {
+    suma += index
   }
-}))
+  res.send({suma})
+})
+
+router.get("/comp", (req, res) => {
+  let suma = 0
+  for (let index = 0; index < 5e8; index++) {
+    suma += index
+  }
+  res.send({suma})
+})
+
+// router.use(compression({
+//   brotli: {
+//     enablred: true, 
+//     xlib: {}
+//   }
+// }))
 
 router.get("/comp", compression(), (req, res) => {
   let string = "string"

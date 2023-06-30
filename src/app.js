@@ -77,11 +77,15 @@ app.use("/users", usRouter.getRouter())
 //   }
 //   console.log(`Servidor Expres puerto ${PORT}`);
 // });
-const httpServer = app.listen(PORT,err =>{
+exports.initServer = () => app.listen(PORT,err =>{
   if (err)  console.log(err)
-  logger.info(`Escuchando en el puerto: ${PORT}`)
+  logger.info(`Escuchando en el puerto: ${8080}`)
 })
 
+// const httpServer = app.listen(PORT,err =>{
+//   if (err)  console.log(err)
+//   logger.info(`Escuchando en el puerto: ${PORT}`)
+// })
 
-const io = new Server(httpServer)
-initSocket(io)
+// const io = new Server(httpServer)
+// initSocket(io)
