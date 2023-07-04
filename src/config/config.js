@@ -24,7 +24,7 @@ const configObje = {
   my_phone_number: process.env.MY_PHONE_NUMBER,
   dbConnection: async () => MongoSingleton.getInstance(),
   // port: process.env.PORT || 8080,
-  // mongoURL: process.env.MONGO_URL,
+  //mongoURL: process.env.MONGO_URL,
   // adminName: process.env.ADMIN || "",
   // adminPassword: process.env.SECRET || "",
   // jwtSigned: process.env.SECRETO || "",

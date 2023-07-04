@@ -10,7 +10,7 @@ class ProductDaoMongo {
     //     return resp
     //   }
     
-    getProduct = async () => {
+       getProduct = async () => {
         let resp = await this.productModel.find({})
         return resp
       }

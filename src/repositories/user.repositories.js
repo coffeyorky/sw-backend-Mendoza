@@ -4,7 +4,6 @@ class UserRepository {
     constructor(dao){
         this.dao = dao
     }
-
     getUsers = async () => {
         return await this.dao.get()
     }

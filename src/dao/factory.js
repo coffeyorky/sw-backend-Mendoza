@@ -12,7 +12,7 @@ switch ("MONGO") {
     const ProductDaoMongo = require("./mongo/products.mongo");
     ProductsDaos = ProductDaoMongo;
 
-    const UserDaoMongo = require("./mongo/products.mongo");
+    const UserDaoMongo = require("./mongo/user.mongo");
     UsersDaos = UserDaoMongo;
 
     const OrderDaoMongo = require('./mongo/orders.mongo.js')

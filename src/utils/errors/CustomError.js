@@ -4,7 +4,7 @@ class CustomeError {
         error.name = name
         error.code = code
         error.cause = cause
-        req.logger.error(error)
+        logger.info(error)
         throw error
     }
 }
