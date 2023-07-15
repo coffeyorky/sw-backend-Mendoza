@@ -3,17 +3,25 @@ class RepositoryGeneric {
         this.dao = dao
     }
 
-    async getItems(){
-        return await this.dao.get()
+    getItems = () =>{
+        return this.dao.get()
+    } 
+
+    getItem = (id) =>{
+        return this.dao.getById(id)
     }
-    async getItem(id){
-        return await this.dao.getById(id)
+
+    createItem = (newItem) => {
+        return this.dao.create(newItem)
     }
-    async createItem(newItem){
-        return await this.dao.create(newItem)
+
+    updateItem = (id, doc) => {
+        return this.dao.update(id,doc);
     }
-    async updateItem(id){}
-    async deleteItem(id){}
+
+    deleteItem = (id) =>{
+        return this.dao.delete(id);
+    }
 }
 
 module.exports= RepositoryGeneric

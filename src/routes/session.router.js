@@ -50,7 +50,7 @@ router.get("/", (req, res) => {
 //     });
 // });
 
-router.post("/login", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
@@ -76,7 +76,7 @@ router.post("/login", async (req, res) => {
       message: "login correcto",
     });
   } catch (error) {
-    req.logger.error(error);
+    console.log(error);
   }
 });
 

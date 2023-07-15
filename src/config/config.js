@@ -11,8 +11,8 @@ logger.info(mode);
 //   path: mode === 'development' ? './.env.development':'./.env.production'
 // })
 
-let url =
-  "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority";
+// let url =
+//   "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority";
 
 const configObje = {
   persistence: process.env.PERSISTENCE,
@@ -24,11 +24,11 @@ const configObje = {
   my_phone_number: process.env.MY_PHONE_NUMBER,
   dbConnection: async () => MongoSingleton.getInstance(),
   // port: process.env.PORT || 8080,
-  //mongoURL: process.env.MONGO_URL,
+  mongoURL: process.env.MONGO_URL,
   // adminName: process.env.ADMIN || "",
   // adminPassword: process.env.SECRET || "",
   // jwtSigned: process.env.SECRETO || "",
-  url: "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority",
+  //url: "mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority",
 };
 
 module.exports = {

@@ -86,19 +86,20 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:8080/api/usuarios
+POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
+    "username": "username",
     "first_name": "bode",
     "last_name": "akuna",
     "email": "kat@kat"
 }
 
 ###
-GET http://localhost:8080/api/usuarios
+GET http://localhost:8080/api/users
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4Njc3NTg2NSwiZXhwIjoxNjg2ODYyMjY1fQ.YX2MTYYhSwkVz8qmKTn8gg44Nex5dwf6gvWpLwxudgI
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhbCIsImVtYWlsIjoiY2FsQGJvZGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTM3OTg1MCwiZXhwIjoxNjg5NDY2MjUwfQ.WopENs1TigTwnylcbkVwn5reE2QMwl4KvlHnDUaq3MY
 
 ###
 GET http://localhost:8080/pruebas/current

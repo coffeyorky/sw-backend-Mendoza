@@ -1,0 +1,107 @@
+paths:
+  /api/users/:
+    get:
+      summary: Obtiene todos los usuarios
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Los usuarios fueron obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "500":
+          description: Error interno del server, usualmente generado por una query defectuosa o un fallo en la DB.
+    post:
+      summary: Crea un nuevo usuario
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/requestBodies/updateUser"
+
+  /api/users/{uid}:
+    get:
+      summary: Obtiene un usuario de la BD mediante un ID
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: El id del usuario que se desea solicitar.
+          schema:
+            type: string
+      responses:
+        "200":
+        description: EL usuario fue obtenido correctamente
+        content: 
+          applications/json:
+            schema:
+              $ref: "#/components/schemas/User"
+            
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: El id del usuario.
+        username:
+          type: string
+          description: El username del usuario.
+        first_name:
+          type: string
+          description: El nombre del usuatio.
+        last_name:
+          type: string
+          description: El apellido del usuario.
+        email:
+          type: string
+          description: El email del usuario.
+        password:
+          type: string
+          description: El password del usuario.
+      example:
+        id_: ObjectId("asdfds.sdffdfgfd.dsfsdx")
+        username: Bode
+        first_name: Bode
+        last_name: Akuna
+        email: kat@kat.com
+        password: $safdfsfsdgddrgtr545eggf.sdfgdgdf.
+
+  requestBodies:
+    updateUser:
+      type: object
+      properties: 
+        username:
+          type: string
+          description: El username del usuario.
+        first_name:
+          type: string
+          description: El nombre del usuatio.
+        last_name:
+          type: string
+          description: El apellido del usuario.
+        email:
+          type: string
+          description: El email del usuario.
+        password:
+          type: string
+          description: El password del usuario.
+      example:
+        username: Bode
+        first_name: Bode
+        last_name: Akuna
+        email: kat@kat.com
+        password: $safdfsfsdgddrgtr545eggf.sdfgdgdf.
+
+

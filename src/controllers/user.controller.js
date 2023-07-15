@@ -10,24 +10,28 @@ const { sendMail } = require("../utils/sendMail");
 const users = [];
 
 class UserController {
+
+
   getUsers = async (req, res) => {
     try {
-        
-      const { page = 1, limit = 10 } = req.query;
-      const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
-        await usersService.getUsers({ page, limit });
-
-      if (!docs) {
+      // const { page = 1, limit = 10 } = req.query;
+      // const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
+      //   await usersService.getUsers({ page, limit });
+      const users = await usersService.getUsers();
+      if (!users) {
         return res.status(400).send("No hay usuarios");
       }
-    //   res.status(200).render({
-    //     users: docs,
-    //     hasPrevPage,
-    //     prevPage,
-    //     hasNextPage,
-    //     nextPage,
-    //   });
-      
+        //  res.status(200).render({
+        //    users: docs,
+        //    hasPrevPage,
+        //    prevPage,
+        //    hasNextPage,
+        //    nextPage,
+        //  });
+        res.status(200).send({
+            status: "success", 
+            payload: users
+            });
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +44,7 @@ class UserController {
             <h1>hola</h1>
             `;
     await sendMail({ userMail, subject, html });
-    res.send("email al usuario enviado")
+    res.send("email al usuario enviado");
   };
 
   getUser = async (req, res) => {
@@ -50,7 +54,14 @@ class UserController {
 
   createUser = async (req, res, next) => {
     try {
-      let { first_name, last_name, email, edad } = req.body;
+      let { username, first_name, last_name, password, email} = req.body;
+      const newUser = {
+        username: username,
+        first_name: first_name,
+        last_name: last_name,
+        password,
+        email: email
+      }
       if (!first_name || !last_name || !email) {
         CustomeError.createError({
           name: "User creation error",
@@ -58,17 +69,13 @@ class UserController {
           message: "Error trying to created user",
           code: EErrors.INVALID_TYPE_ERROR,
         });
-
-        //return response.status(400).send({ message: 'Che pasar todos los datos'})
       }
 
-      //let userAgregado = await usersService.createUser({first_name, last_name})
-      let userAgregado = users.push({ first_name, last_name, email });
-      // console.log(userAgregado)
+      let result = await usersService.createUser(newUser)
+      //let userAgregado = users.push({ first_name, last_name, email });
 
       res.status(201).send({
-        users,
-        userAgregado,
+        status: "success",
         message: "usuario creado",
       });
     } catch (error) {

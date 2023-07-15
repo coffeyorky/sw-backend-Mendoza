@@ -4,21 +4,20 @@ class UserRepository {
     constructor(dao){
         this.dao = dao
     }
-    getUsers = async () => {
-        return await this.dao.get()
+    getUsers = () => {
+        return this.dao.get()
     }
 
-    getItem = async (id) => {
-        return await this.dao.getById(id)
+    getItem = (id) => {
+        return this.dao.getById(id)
     }
 
     createUser = async (user) =>{
-        let newUser = new UserDto(user)
-        let result = await this.dao.save.create(newUser)
-        return result
+        return this.dao.save(user)
     }
-    updateUser = async (uid, userToReplace) => {
-        return await this.dao.updateUser({_id: uid}, userToReplace)
+    
+    updateUser = (uid, userToReplace) => {
+        return this.dao.updateUser({_id: uid}, userToReplace)
     }
 }
 
