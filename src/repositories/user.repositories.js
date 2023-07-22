@@ -4,8 +4,8 @@ class UserRepository {
     constructor(dao){
         this.dao = dao
     }
-    getUsers = () => {
-        return this.dao.get()
+    get = (params) => {
+        return this.dao.get(params)
     }
 
     getItem = (id) => {
@@ -18,6 +18,9 @@ class UserRepository {
     
     updateUser = (uid, userToReplace) => {
         return this.dao.updateUser({_id: uid}, userToReplace)
+    }
+    deleteItem = (id) =>{
+        return this.dao.delete(id);
     }
 }
 

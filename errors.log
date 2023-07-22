@@ -8,3 +8,13 @@ error: undefined
 error: undefined
 error: undefined
 error: undefined
+error: undefined {"_message":"productos validation failed","errors":{"code":{"kind":"required","message":"Path `code` is required.","name":"ValidatorError","path":"code","properties":{"message":"Path `code` is required.","path":"code","type":"required"}},"description":{"kind":"required","message":"Path `description` is required.","name":"ValidatorError","path":"description","properties":{"message":"Path `description` is required.","path":"description","type":"required"}},"price":{"kind":"required","message":"Path `price` is required.","name":"ValidatorError","path":"price","properties":{"message":"Path `price` is required.","path":"price","type":"required"}}}}
+error: undefined {"_message":"productos validation failed","errors":{"code":{"kind":"required","message":"Path `code` is required.","name":"ValidatorError","path":"code","properties":{"message":"Path `code` is required.","path":"code","type":"required"}},"description":{"kind":"required","message":"Path `description` is required.","name":"ValidatorError","path":"description","properties":{"message":"Path `description` is required.","path":"description","type":"required"}},"price":{"kind":"required","message":"Path `price` is required.","name":"ValidatorError","path":"price","properties":{"message":"Path `price` is required.","path":"price","type":"required"}}}}
+error: undefined {"_message":"productos validation failed","errors":{"code":{"kind":"required","message":"Path `code` is required.","name":"ValidatorError","path":"code","properties":{"message":"Path `code` is required.","path":"code","type":"required"}},"description":{"kind":"required","message":"Path `description` is required.","name":"ValidatorError","path":"description","properties":{"message":"Path `description` is required.","path":"description","type":"required"}},"price":{"kind":"required","message":"Path `price` is required.","name":"ValidatorError","path":"price","properties":{"message":"Path `price` is required.","path":"price","type":"required"}}}}
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined
+error: undefined

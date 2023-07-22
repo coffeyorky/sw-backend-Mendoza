@@ -3,10 +3,11 @@ const { createHash, isValidPassword } = require("../utils/brcyptPass.js");
 const passport = require("passport");
 const { generateToken, authToken } = require("../utils/jsonwebtoken.js");
 const jwt = require("jsonwebtoken");
-const UserDaoMongo = require("../dao/mongo/user.mongo");
-const { userModel } = require("../models/user.model.js");
+const UserDaoMongo = require("../dao/user.mongo.js");
+const userModel = require("../dao/models/user.model.js");
 const { faker } = require("@faker-js/faker");
 const { logger } = require("../utils/logger.js");
+const UserDto = require("../dto/user.dto.js");
 
 const userDaoMongo = new UserDaoMongo();
 const router = Router();
@@ -50,7 +51,7 @@ router.get("/", (req, res) => {
 //     });
 // });
 
-router.post("/", async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await userModel.findOne({ email });
@@ -61,20 +62,24 @@ router.post("/", async (req, res) => {
         message: "revisar usuario y contraseña",
       });
     }
-
-    const isValid = isValidPassword(user, password);
+    const isValid = await isValidPassword(user, password);
     logger.info(isValid);
     if (!isValid)
       return res.status(401).send({
         status: "error",
         message: "revisar usuario y contraseña",
       });
-      logger.info("logged in!");
-
-    res.send({
-      status: "success",
-      message: "login correcto",
-    });
+    logger.info("logged in!");
+    const userDto = UserDto.getUserTokenFrom(user)
+    const token = jwt.sign(userDto, "tokenSecretJWT", {expiresIn: "24h"});
+    res.cookie("coderCookie", token, {
+      maxAge: 60 * 60 * 1000,
+      httpOnly: true,
+    }).
+      send({
+        status: "success",
+        message: "login correcto",
+      });
   } catch (error) {
     console.log(error);
   }
@@ -147,6 +152,13 @@ router.post("/register", async (req, res) => {
     logger.info(error);
   }
 });
+
+router.get("/current", async(req,res) =>{
+  const cookie = req.cookies['coderCookie']
+  const user = jwt.verify(cookie,'tokenSecretJWT');
+  if(user)
+      return res.send({status:"success",payload:user})
+})
 
 router.get("/test/user", (req, res) => {
   let first_name = faker.name.firstName();

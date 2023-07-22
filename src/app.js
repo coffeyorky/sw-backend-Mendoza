@@ -25,7 +25,7 @@ const { create } = require("connect-mongo");
 const { initializePassport } = require("./passport-jwt/passport.config");
 const passport = require("passport");
 const { addLogger, logger } = require("./utils/logger");
-const { default: mongoose } = require("mongoose");
+const  mongoose = require("mongoose");
 // const { processFunction } = require("./utils/process.js");
 require("dotenv").config();
 
@@ -34,7 +34,7 @@ configObje.dbConnection();
 const app = express();
 const PORT = process.env.PORT || 8080;
 const connection = mongoose.connect("mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority")
-//console.log(configObje)
+//console.log(connection)
 
 const swaggerOptions = {
   definition: {

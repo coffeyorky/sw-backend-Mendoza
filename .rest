@@ -1,14 +1,15 @@
-GET http://localhost:8080/api/productos
+GET http://localhost:8080/api/producto
 
 ###
 
-POST http://localhost:8080/api/productos
+POST http://localhost:8080/api/producto
 Content-Type: application/json
 
 {
     "title": "Star Wars: Savage Opress Mini Busto",
     "description": "Una vez un Hermano de la Noche común, ahora Savage Opress convertido en el aprendiz Sith del Conde Dooku, y más tarde en la mano derecha del imperio criminal de Darth Maul. ¡Ahora, es un mini busto a escala 1/6 completamente nuevo de Gentle Giant LTD! Con una altura aproximada de 6,5 pulgadas, este detallado minibusto captura al Dathomirian con el sable de luz apuntando a su oponente",
     "price": "50",
+    "category": "figura",
     "thumbnail": "https://i.ibb.co/0ng5kH1/CW-Savage-Opress-Bust.jpg",
     "stock": 15,
     "code": "sw21",
@@ -17,7 +18,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/api/productos/64436d10a1eae7c5e94ae88d
+PUT http://localhost:8080/api/producto/64436d10a1eae7c5e94ae88d
 Content-Type: application/json
 
 {
@@ -90,16 +91,16 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
-    "username": "username",
     "first_name": "bode",
     "last_name": "akuna",
-    "email": "kat@kat"
+    "email": "kat@cal",
+    "password": "bode"
 }
 
 ###
 GET http://localhost:8080/api/users
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhbCIsImVtYWlsIjoiY2FsQGJvZGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTM3OTg1MCwiZXhwIjoxNjg5NDY2MjUwfQ.WopENs1TigTwnylcbkVwn5reE2QMwl4KvlHnDUaq3MY
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhbCIsImVtYWlsIjoiY2FsQGJvZGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTYyMDAzNCwiZXhwIjoxNjg5NzA2NDM0fQ.dydJTfG6IoFIgdrZvy839ifxGeVomV5HTmpPEjjpByA
 
 ###
 GET http://localhost:8080/pruebas/current

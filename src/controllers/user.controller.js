@@ -17,7 +17,7 @@ class UserController {
       // const { page = 1, limit = 10 } = req.query;
       // const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
       //   await usersService.getUsers({ page, limit });
-      const users = await usersService.getUsers();
+      const users = await usersService.get();
       if (!users) {
         return res.status(400).send("No hay usuarios");
       }

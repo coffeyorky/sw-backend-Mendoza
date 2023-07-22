@@ -1,4 +1,4 @@
-const { UserDto } = require("../dto/user.dto");
+const ProdDto = require("../dto/product.dto")
 
 //const RepositoryGeneric = require("./repositoryGeneric");
 
@@ -6,22 +6,24 @@ class ProductRepository {
     constructor(dao){
         this.dao = dao
     }
-    getProducts = async () => {
-        return await this.dao.getProduct()
+    getProducts = (params) => {
+        return this.dao.get(params)
     }
 
-    getProduct = async (id) => {
-        return await this.dao.getById(id)
+    getProduct = (id) => {
+        return this.dao.getBy(id)
     }
 
-    createProduct = async (newProduct) => {
-        return await this.dao.addProduct(newProduct)
+    create = (newProduct) => {
+        return this.dao.save(newProduct)
     }
 
-    updateProd = async (id, productToReplace) => {
-        return await this.dao.updateProduct(id, productToReplace)
+    updateProd = (id, productToReplace) => {
+        return this.dao.updateProduct(id, productToReplace)
     }
-
+    deleteItem = (id) =>{
+        return this.dao.deleteProduct(id);
+    }
 
 }
 

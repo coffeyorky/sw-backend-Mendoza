@@ -9,11 +9,10 @@ const productSchema = new Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   price: {
     type: Number,
-    required: true,
+
   },
   category: {
     type: String,
@@ -24,20 +23,18 @@ const productSchema = new Schema({
   },
   stock: {
     type: Number,
-    required: true,
   },
   code: {
     type: String,
-    required: true,
-  },
+},
   status: {
     type: Boolean,
   },
 });
 
-productSchema.plugin(mongoosePaginate)
+//productSchema.plugin(mongoosePaginate)
 const productModel = model(collection, productSchema);
 
-module.exports =  {
+module.exports =  
   productModel
-}
+
