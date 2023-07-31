@@ -26,26 +26,14 @@ const { initializePassport } = require("./passport-jwt/passport.config");
 const passport = require("passport");
 const { addLogger, logger } = require("./utils/logger");
 const  mongoose = require("mongoose");
-// const { processFunction } = require("./utils/process.js");
+const { swaggerOptions } = require("./config/swagger.config");
 require("dotenv").config();
 
 configObje.dbConnection();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-const connection = mongoose.connect("mongodb+srv://Coffeyorky:thebadbatch123@cluster0.j69jxej.mongodb.net/ecommerce?retryWrites=true&w=majority")
-//console.log(connection)
-
-const swaggerOptions = {
-  definition: {
-    openapi: "3.0.1",
-    info: {
-      title: "Documentacion de app",
-      description: "Api pensada para adopcion",
-    },
-  },
-  apis: [`${__dirname}/docs/**/*.yaml`],
-};
+const connection = mongoose.connect(process.env.MONGO_URL)
 
 const specs = swaggerJsDoc(swaggerOptions);
 
@@ -88,18 +76,6 @@ app.use("/pruebas", testRouter);
 
 const usRouter = new UserRouter();
 app.use("/users", usRouter.getRouter());
-
-// app.listen(PORT, (err) => {
-//   if (err) {
-//     console.log(err);
-//   }
-//   console.log(`Servidor Expres puerto ${PORT}`);
-// });
-
-// exports.initServer = () => app.listen(PORT,err =>{
-//   if (err) console.log(err)
-//   logger.info(`Escuchando en el puerto: ${8080}`)
-// })
 
 const httpServer = app.listen(PORT, (err) => {
   if (err) console.log(err);
