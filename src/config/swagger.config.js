@@ -1,4 +1,4 @@
-const {dirname} = require("node:path")
+const { dirname } = require("path")
 console.log(dirname(__dirname))
 exports.swaggerOptions = {
     definition: {
