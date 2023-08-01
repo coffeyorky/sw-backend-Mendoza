@@ -26,7 +26,7 @@ const { initializePassport } = require("./passport-jwt/passport.config");
 const passport = require("passport");
 const { addLogger, logger } = require("./utils/logger");
 const  mongoose = require("mongoose");
-const { swaggerOptions } = require("./config/swagger.config");
+const { swaggerOptions } = require("./config/swagger.config.js");
 require("dotenv").config();
 
 configObje.dbConnection();
