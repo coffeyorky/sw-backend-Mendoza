@@ -26,7 +26,7 @@ const { initializePassport } = require("./passport-jwt/passport.config");
 const passport = require("passport");
 const { addLogger, logger } = require("./utils/logger");
 const  mongoose = require("mongoose");
-const { swaggerOptions } = require("./config/swagger.config.js");
+const { swaggerOptions } = require("./config/swagger.config");
 require("dotenv").config();
 
 configObje.dbConnection();
@@ -35,7 +35,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const connection = mongoose.connect(process.env.MONGO_URL)
 
-//const specs = swaggerJsDoc(swaggerOptions);
+const specs = swaggerJsDoc(swaggerOptions);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -56,13 +56,13 @@ app.use(express.static("public"));
 
 app.use("/virtual", express.static(__dirname + "/public"));
 
-app.engine("handlebars", handlebars.engine());
-app.set("view engine", "handlebars");
+// app.engine("handlebars", handlebars.engine());
+// app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
 app.use("/subir", express.static(__dirname + "/public"));
 
-//app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 app.use("/session", sessionRouter);
 app.use("/cookie", cookieRouter);
