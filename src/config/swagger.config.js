@@ -1,5 +1,5 @@
 const { dirname } = require("path")
-console.log(dirname(__dirname))
+
 exports.swaggerOptions = {
     definition: {
       openapi: "3.0.1",
