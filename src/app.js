@@ -35,7 +35,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const connection = mongoose.connect(process.env.MONGO_URL)
 
-const specs = swaggerJsDoc(swaggerOptions);
+//const specs = swaggerJsDoc(swaggerOptions);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -62,7 +62,7 @@ app.set("views", __dirname + "/views");
 
 app.use("/subir", express.static(__dirname + "/public"));
 
-app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
+//app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 app.use("/session", sessionRouter);
 app.use("/cookie", cookieRouter);
