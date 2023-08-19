@@ -43,9 +43,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser("CoderS3cR3t@"));
 app.use(cors());
 
+app.use(session({
+  name : 'codeil',
+  secret : 'something',
+  resave :false,
+  saveUninitialized: true,
+  cookie : {
+          maxAge:(1000 * 60 * 100)
+  }      
+}))
 initializePassport();
 app.use(passport.initialize());
-// app.use(passport.session())
+app.use(passport.session())
 
 // processFunction()
 
@@ -56,8 +65,8 @@ app.use(express.static("public"));
 
 app.use("/virtual", express.static(__dirname + "/public"));
 
-// app.engine("handlebars", handlebars.engine());
-// app.set("view engine", "handlebars");
+app.engine("handlebars", handlebars.engine());
+app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
 app.use("/subir", express.static(__dirname + "/public"));

@@ -18,6 +18,5 @@ const CartSchema = new Schema({
 
  const cartModel = model(collection, CartSchema)
 
-module.exports = {
+module.exports = 
     cartModel
-}

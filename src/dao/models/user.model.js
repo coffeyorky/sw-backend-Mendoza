@@ -22,7 +22,7 @@ const UserSchema = new Schema({
   },
   password:{
     type:String,
-    required:true
+    // required:true
 },
 role: {
     type:String,

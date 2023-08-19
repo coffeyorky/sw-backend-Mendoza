@@ -15,6 +15,9 @@ switch ("MONGO") {
     const UserDaoMongo = require("./user.mongo");
     UsersDaos = UserDaoMongo;
 
+    const CartDaoMongo = require('./mongo/cart.mongo.js')
+    CartsDaos = CartDaoMongo
+
     const OrderDaoMongo = require('./mongo/orders.mongo.js')
     OrderDao = OrderDaoMongo
 
@@ -34,5 +37,6 @@ switch ("MONGO") {
 module.exports = {
   ProductsDaos,
   UsersDaos,
+  CartsDaos,
   OrderDao
 };
