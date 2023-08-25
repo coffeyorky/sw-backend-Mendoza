@@ -75,7 +75,7 @@ app.use("/docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));
 
 app.use("/session", sessionRouter);
 app.use("/cookie", cookieRouter);
-app.use("/", viewsRouter);
+// app.use("/", viewsRouter);
 app.use("/api/producto", ProductRou);
 app.use("/api/carts", CartRouter);
 app.use("/api/users", usersRouter);
