@@ -3,7 +3,7 @@ const { nanoid } = ("nanoid");
 
 class ProductManager {
   constructor() {
-    this.ruta = "./src/dao/models/products.json";
+    this.ruta = "./src/dao/models/product.json";
   }
   readProducts = async () => {
     let products = await fs.readFile(this.ruta);

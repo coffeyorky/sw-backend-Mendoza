@@ -4,7 +4,11 @@ class ProdDto {
       title: product.title || "",
       category: product.category || "",
       stock: product.stock || "",
-      image: product.image || "",
+      thumbnail: product.thumbnail || "",
+      description: product.description || "",
+      price: product.price || "",
+      code: product.code || "",
+      status: product.status || ""
     };
   };
 }

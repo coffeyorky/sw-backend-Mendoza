@@ -6,7 +6,7 @@ class ProductRepository {
     constructor(dao){
         this.dao = dao
     }
-    getProducts = (params) => {
+    get = (params) => {
         return this.dao.get(params)
     }
 

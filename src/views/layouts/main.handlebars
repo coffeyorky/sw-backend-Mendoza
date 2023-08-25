@@ -1,26 +1,35 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link rel="stylesheet" href="/virtual/css/style.css"/>
-</head>
-<body>
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="stylesheet" href="/virtual/css/style.css" />
+    <script
+      src="https://kit.fontawesome.com/8b0d68f728.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
 
-    <nav>
+    <div class="barra">
+      <ul className="menu">
         <a href="/">Inicio</a>
         <a href="/api/producto">Productos</a>
         <a href="/api/users">Usuarios</a>
-        <a href="/api/cart">Cart</a>
+        <a href="/api/carts">Cart</a>
         <a href="/session">Login</a>
         <a href="/session/register">Register</a>
         <a href="/session/logout">Logout</a>
-    </nav>
+        <div class="cart">
+          <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+        </div>
+      </ul>
+    </div>
 
-    {{{ body }}}
+    {{{body}}}
 
-</body>
+  </body>
 
 </html>

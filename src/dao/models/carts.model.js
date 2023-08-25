@@ -4,10 +4,16 @@ const collection = 'carts'
 
 const CartSchema = new Schema({  
     products: [{
-        product: {
-            type: Schema.Types.ObjectId,
-            ref: 'productos'
-        },
+        title: {
+            type: String,
+            required: true,
+          },
+          price: {
+            type: Number,
+          },
+          thumbnail: {
+            type: String
+          },
         quantity : Number
     }]
 })
@@ -16,7 +22,7 @@ const CartSchema = new Schema({
      this.populate('products.product')
  })
 
- const cartModel = model(collection, CartSchema)
+const cartModel = model(collection, CartSchema)
 
 module.exports = 
     cartModel

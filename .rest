@@ -2,7 +2,7 @@ GET http://localhost:8080/api/producto
 
 ###
 
-POST http://localhost:8080/api/producto
+POST http://localhost:8080/api/producto/prod
 Content-Type: application/json
 
 {
@@ -34,25 +34,29 @@ DELETE http://localhost:8080/api/productos/64436d10a1eae7c5e94ae88d
 
 ### CART
 
-GET http://localhost:8080/api/carts/6444c10cfba9375bece3fb2d
+GET http://localhost:8080/api/carts
 
 ###
 
-POST http://localhost:8080/api/carts
-Content-Type: application/json
-
-{
-    "products": []
-}
-
-###
-
-PUT http://localhost:8080/api/carts/6444c17fc2fedfd83c779ce6
+POST http://localhost:8080/api/carts/cart
 Content-Type: application/json
 
 {
     "products": 
-         {   "title": "Remera Bad batch",
+         [{  "title": "Remera Bad batch",
+            "thumbnail": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
+            "price": 150,
+            "code": "sw10"}]
+}
+
+###
+
+PUT http://localhost:8080/api/carts/64e8ebcc18664163245087aa
+Content-Type: application/json
+
+{
+    "products": 
+         {  "title": "Remera Bad batch",
             "thumbnail": "https://i.ibb.co/VVcTQv2/thbbr.jpg",
             "price": 150,
             "code": "sw10"}
