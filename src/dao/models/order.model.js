@@ -12,7 +12,7 @@ const orderSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'products'
         }
-    }],
+    }], 
     total: Number,
     created: Date
 })
