@@ -10,7 +10,7 @@ const ordersRouter = require("./routes/orders.router.js");
 const { UserRouter } = require("./routes/user.js");
 const usersRouter = require("./routes/users.router.js");
 const testRouter = require("./routes/pruebas.router.js");
-const handlebars = require("express-handlebars");
+//const handlebars = require("express-handlebars");
 const { configObje } = require("./config/config.js");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -65,8 +65,8 @@ app.use(express.static("public"));
 
 app.use("/virtual", express.static(__dirname + "/public"));
 
-app.engine("handlebars", handlebars.engine());
-app.set("view engine", "handlebars");
+//app.engine("handlebars", handlebars.engine());
+//app.set("view engine", "handlebars");
 app.set("views", __dirname + "/views");
 
 app.use("/subir", express.static(__dirname + "/public"));
