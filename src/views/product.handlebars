@@ -4,10 +4,10 @@
   {{#each products}}
     <div class="caja">
       <img alt={{this.title}} src={{this.imagen}} width="200"/>
-      <h2>{{payload.title}}</h2>
-      <h4>{{payload.category}}</h4>
+      <h2>{{this.title}}</h2>
+      <h4>{{this.category}}</h4>
       <p>{{this.description}}</p>
-      <h3>{{payload.stock}}</h3>
+      <h3>{{this.stock}}</h3>
       <h3>${{this.price}}</h3>
       <button class="btn">Agregar al carrito</button>
     </div>

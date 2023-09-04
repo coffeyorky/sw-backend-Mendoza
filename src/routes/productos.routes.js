@@ -13,8 +13,7 @@ const router = Router();
 
 // router.get("/", passportCall("jwt"),authorization("admin"),getProducts);
 // router.get("/", get)
-router.get("/get", getProducts)
-router.get("/", getSend);
+router.get("/", getProducts);
 router.get("/:pid", getProduct);
 router.post('/prod', checkAuth, authorization(["user"]), createProduct);
 router.put("/:pid", checkAuth, authorization(["premium"]), updateProduct);

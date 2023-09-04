@@ -23,7 +23,8 @@ class ProductController {
        } else {
          res.json({message: "No hay productos"})
        }
-       res.status(200).send({
+       res.send({
+        status: "success",
         payload: products
       });
     } catch (error) {
