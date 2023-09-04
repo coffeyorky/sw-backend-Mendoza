@@ -1,9 +1,10 @@
-// const { Router } = require('express')
-// const ProductManager = require("../components/productManager.js");
+const { Router } = require("express");
+const ProductManager = require("../components/productManager.js");
+const ProductDaoMongo = require("../dao/mongo/products.mongo.js")
 
-// const productos = new ProductManager();
+const productos = new ProductManager();
 
-// const router =  Router()
+const router = Router();
 
 // const prodArray = [
 //     {
@@ -32,18 +33,18 @@
 //       "id": "3",
 //        "title": "Figura Black Series",
 //        "description": "Figuras HotToys de rex y cody de Clone Wars - 1/6 scale collectible figure",
-//        "code": "st14",    
+//        "code": "st14",
 //        "price": 160,
 //        "status": "true",
 //        "stock": 15,
-//        "category": "figuras",   
+//        "category": "figuras",
 //        "imagen": "https://i.ibb.co/NZSXyYt/rex.jpg"
 //      },
 //      {
 //        "id": "4",
 //        "title": "Funko Hunter Star Wars",
 //        "description": "Funko pop de Hunter lider del equipo en la serie The Bad Batch",
-//        "code": "st15",    
+//        "code": "st15",
 //        "price": 90,
 //        "status": "true",
 //        "stock": 15,
@@ -54,18 +55,18 @@
 //        "id": "5",
 //        "title": "Coleccionable",
 //        "description": "Figura HotToys del protagonista de The Mandalorian",
-//        "code": "st16",    
+//        "code": "st16",
 //        "price": 100,
 //        "status": "true",
 //        "stock": 15,
-//        "category": "figuras",    
+//        "category": "figuras",
 //        "imagen": "https://i.ibb.co/sRYD530/tmand.jpg"
 //      },
 //      {
 //        "id": "6",
 //        "title": "Comic Darth Maul",
 //        "description": "Historias del pasado del hijo de dathomir, 40 hojas",
-//        "code": "st17",    
+//        "code": "st17",
 //        "price": 70,
 //        "status": "true",
 //        "stock": 15,
@@ -74,13 +75,16 @@
 //      }
 // ]
 
-// router.get("/", async (req, res) => {
-//   let allProducts = await productos.readProducts()
-//       res.render("home", {
-//           title: "Express Avanzado | Handlebars",
-//           productos : allProducts
-//       })
-// })
+router.get("/chat", (req, res) => {
+  res.render("chat", {})
+})
 
+router.get("/", async (req, res) => {
+  let allProducts = await productos.readProducts();
+  res.render("home", {
+    title: "Express Avanzado | Handlebars",
+    productos: allProducts,
+  });
+});
 
-// module.exports = router
+module.exports = router;

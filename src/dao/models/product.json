@@ -85,7 +85,7 @@
       "status": "true",
       "stock": 15,
       "category": "merch",
-      "thumbnail": "https://i.ibb.co/3B5kt9Z/tetera.png"
+      "imagen": "https://i.ibb.co/3B5kt9Z/tetera.png"
   },
   {
       "id": "9",
@@ -96,7 +96,7 @@
       "status": "true",
       "stock": 15,
       "category": "merch",
-      "thumbnail": "https://i.ibb.co/Px8YpF0/starwars-Medias.png"
+      "imagen": "https://i.ibb.co/Px8YpF0/starwars-Medias.png"
   },
   {
       "id": "10",
@@ -107,7 +107,7 @@
       "status": "true",
       "stock": 15,
       "category": "merch",
-      "thumbnail": "https://i.ibb.co/mGPV4rm/medias-boba-Fett.jpg"
+      "imagen": "https://i.ibb.co/mGPV4rm/medias-boba-Fett.jpg"
   },
   {
       "id": "11",
@@ -118,7 +118,7 @@
       "status": "true",
       "stock": 15,
       "category": "figuras",
-      "thumbnail": "https://i.ibb.co/m0HNRGM/kotobukiya-Tech-Tbb.jpg"
+      "imagen": "https://i.ibb.co/m0HNRGM/kotobukiya-Tech-Tbb.jpg"
   },
   {
       "id": "12",
@@ -129,6 +129,6 @@
       "status": "true",
       "stock": 15,
       "category": "figuras",  
-      "thumbnail": "https://i.ibb.co/0ng5kH1/CW-Savage-Opress-Bust.jpg"
+      "imagen": "https://i.ibb.co/0ng5kH1/CW-Savage-Opress-Bust.jpg"
   }
   ]

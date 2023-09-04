@@ -4,7 +4,9 @@
 //     return numero1 + numero2
 // }
 
-const { logger } = require("../src/utils/logger")
+const { logger } = require("../src/config/logger.config")
+
+
 
 // const suma = (...numeros) => {
 //     if(numeros.length===0) return 0

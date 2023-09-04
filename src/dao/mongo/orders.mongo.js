@@ -1,3 +1,4 @@
+const { logger } = require("../../config/logger.config");
 const { orderModel } = require("../models/order.model");
 
 class OrderDaoMongo {

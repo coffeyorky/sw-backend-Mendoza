@@ -7,12 +7,15 @@ class UserRepository {
   get = (params) => {
     return this.dao.get(params);
   };
-  getItem = (id) => {
+  getById = (id) => {
     return this.dao.getById(id);
   };
   createUser = async (user) => {
     return this.dao.save(user);
   };
+  getUserByEmail = (email) =>{
+    return this.dao.getBy({email});
+}
   updateUser = (uid, userToReplace) => {
     return this.dao.updateUser({ _id: uid }, userToReplace);
   };

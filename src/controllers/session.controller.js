@@ -5,20 +5,21 @@ const jwt = require("jsonwebtoken");
 const UserDaoMongo = require("../dao/user.mongo.js");
 const userModel = require("../dao/models/user.model.js");
 const { faker } = require("@faker-js/faker");
-const { logger } = require("../utils/logger.js");
+const { logger } = require("../config/logger.config");
 const UserDto = require("../dto/user.dto.js");
+const { tokenSign } = require("../utils/handleToken.js");
 
 const userDaoMongo = new UserDaoMongo();
 
-const users = [
-  {
-    first_name: "rex",
-    last_name: "rex",
-    email: "rex@rex",
-    password: "rex",
-    admin: true,
-  },
-];
+// const users = [
+//   {
+//     first_name: "rex",
+//     last_name: "rex",
+//     email: "rex@rex",
+//     password: "rex",
+//     admin: true,
+//   },
+// ];
 
 class SessionController {
   get = (req, res) => {
@@ -27,7 +28,7 @@ class SessionController {
 
   postSession = async (req, res) => {
     try {
-      const { email, password } = req.body;
+      const { email, password, role } = req.body;
       const user = await userModel.findOne({ email });
       logger.info(user);
       if (!user) {
@@ -36,25 +37,23 @@ class SessionController {
           message: "revisar usuario y contraseña",
         });
       }
-      const isValid = await isValidPassword(user, password);
-      logger.info(isValid);
-      if (!isValid)
+       const isValid = await isValidPassword(user, password);
+       console.log(isValid);
+       if (!isValid)
         return res.status(401).send({
-          status: "error",
-          message: "revisar usuario y contraseña",
-        });
+           status: "error",
+           message: "revisar de nuevo",
+         });
       logger.info("logged in!");
-      const userDto = UserDto.getUserTokenFrom(user);
-      const token = jwt.sign(userDto, "tokenSecretJWT", { expiresIn: "24h" });
-      res
-        .cookie("coderCookie", token, {
-          maxAge: 60 * 60 * 1000,
-          httpOnly: true,
-        })
-        .send({
-          status: "success",
-          message: "login correcto",
-        });
+      const token = await tokenSign(user);
+      // const userDto = UserDto.getUserTokenFrom(user);
+      // const token = jwt.sign({email, password}, "CoderS3cR3t@", { expiresIn: "24h" });
+      const data = {
+        token: token,
+        user: user,
+      };
+      console.log(data)
+      res.status(200).redirect("http://localhost:8080/");
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +65,12 @@ class SessionController {
 
   postRegister = async (req, res) => {
     try {
-      const { username, first_name, last_name, email, password } = req.body;
+      const { username, first_name, last_name, email, role, password } =
+        req.body;
+      if (!first_name || !last_name || !email || !password)
+        return res
+          .status(400)
+          .send({ status: "error", error: "Incomplete values" });
       const userExist = await userModel.findOne({ email });
       if (userExist)
         return res
@@ -78,24 +82,21 @@ class SessionController {
         first_name,
         last_name,
         email,
+        role,
         password: hashedPassword,
       };
-      logger.info(users);
+      console.log(newUser);
       const resp = await userModel.create(newUser);
       const token = generateToken({
         username,
         email,
-        role: "user",
+        role,
       });
-      logger.info(token);
+      console.log(token);
 
-      res.status(200).send({
-        status: "success",
-        message: "usuario creado",
-        token,
-      });
+      res.status(200).redirect("http://localhost:8080/api/session/login");
     } catch (error) {
-      logger.info(error);
+      console.log(error);
     }
   };
 
@@ -153,7 +154,8 @@ class SessionController {
   getLogout = (req, res) => {
     req.session.destroy((err) => {
       if (err) return res.send({ status: "Logout error", message: err });
-      res.send("logout ok");
+      // res.redirect("http://localhost:8080/api/session/login");
+      res.render('logout', {status: false});
     });
   };
 }

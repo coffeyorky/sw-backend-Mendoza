@@ -1,13 +1,13 @@
 const productModel = require("../models/products.model");
 
 class ProductDaoMongo {
-  // getProduct = async ({page, limit, query=""}) => {
+  // get = async ({page, limit, query=""}) => {
   //     let resp = await this.productModel.paginate({}, {limit, page, lean:true})
   //     console.log(resp)
   //     return resp
   //   }
 
-  get = (params) => {
+  get = async (params) => {
     return productModel.find(params);
   };
   getBy = (id) => {

@@ -11,40 +11,27 @@ const prodDaoMongo = new ProductDaoMongo();
 const productos = new ProductManager();
 
 class ProductController {
+   get = (req, res) => {
+     res.render("product", {});
+   };
 
   getProducts = async (req, res) => {
     try {
-      const products = await productModel.find()
+      const products = await prodService.get()
       if(products){
-        res.json({products})
-      } else {
-        res.json({message: "No hay productos"})
-      }
+         res.json({products})
+       } else {
+         res.json({message: "No hay productos"})
+       }
+       res.status(200).send({
+        payload: products
+      });
     } catch (error) {
       console.log(error);
     }
   };
-  // try {
-  //   const { page = 4, limit = 10 } = req.query;
-  //   const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
-  //     await prodService.get({ page, limit });
-  //   if (!docs) {
-  //     return res.status(400).send("no hay productos");
-  //   }
-  //   res.status(200).send({
-  //     products: docs,
-  //   });
-  //   //  res.status(200).render(`product`, {
-  //   //    products: docs,
-  //   //    hasPrevPage,
-  //   //    prevPage,
-  //   //    hasNextPage,
-  //   //    nextPage
-  //   //   });
-  // } catch (error) {
-  //   console.log(error);
-  // }
-
+  
+//prueba de get
   getSend = async (req, res) => {
     const products = await productos.readProducts();
     res.status(200).render("product", {
@@ -52,10 +39,14 @@ class ProductController {
       products,
     });
   };
-
+//prueba de get
+ 
   getProduct = async (req, res) => {
     try {
-      res.send("get product by id");
+      const { pid } = req.params;
+      let result = await prodService.getProduct(pid);
+      res.status(201).send({
+        producto: result,})
     } catch (error) {
       console.log(error);
     }
@@ -112,7 +103,7 @@ class ProductController {
       }
       let result = await prodService.updateProd(pid, productToReplace);
       res.status(201).send({
-        users: result,
+        product: result,
         message: "Producto Modificado",
       });
     } catch (error) {
@@ -156,3 +147,4 @@ class ProductController {
 }
 
 module.exports = new ProductController();
+

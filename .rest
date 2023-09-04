@@ -2,8 +2,17 @@ GET http://localhost:8080/api/producto
 
 ###
 
+GET http://localhost:8080/api/producto/get
+
+###
+
+GET http://localhost:8080/api/producto/644f5532685071d9fee258d1
+
+###
+
 POST http://localhost:8080/api/producto/prod
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGYzOWFmZTg2NWUwNzkwZmE4MmQ3MjAiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNjkzNzgxNzM1LCJleHAiOjE2OTM4NjgxMzV9.DSlMrOk7apn7GGSWfk6o3fWE1KrOLq91xFMjZ4hQhLU
 
 {
     "title": "Star Wars: Savage Opress Mini Busto",
@@ -20,6 +29,7 @@ Content-Type: application/json
 
 PUT http://localhost:8080/api/producto/64436d10a1eae7c5e94ae88d
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNva2FAc29rYSIsIl9pZCI6IjY0ZjUyMTJjOWI0MTgwOGU3ZTFjYmRmNiIsInJvbGUiOlsicHJlbWl1bSJdLCJpYXQiOjE2OTM3ODY0MTcsImV4cCI6MTY5Mzg3MjgxN30.QJyly6FuE_AyXWx4OrbkA94arfKGaArUwvDG58nI4LE
 
 {
     "title": "Remera Bad batch",
@@ -30,15 +40,25 @@ Content-Type: application/json
 
 ### 
 
-DELETE http://localhost:8080/api/productos/64436d10a1eae7c5e94ae88d
+DELETE http://localhost:8080/api/productos/64e2517de0e247561628adc0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGYzOWFmZTg2NWUwNzkwZmE4MmQ3MjAiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNjkzNzgxNzM1LCJleHAiOjE2OTM4NjgxMzV9.DSlMrOk7apn7GGSWfk6o3fWE1KrOLq91xFMjZ4hQhLU
 
 ### CART
 
 GET http://localhost:8080/api/carts
+Content-Type: application/json
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGYzOWFmZTg2NWUwNzkwZmE4MmQ3MjAiLCJyb2xlIjpbInVzZXIiXSwiaWF0IjoxNjkzNzgxNzM1LCJleHAiOjE2OTM4NjgxMzV9.DSlMrOk7apn7GGSWfk6o3fWE1KrOLq91xFMjZ4hQhLU ----user
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuaUBhbmkiLCJfaWQiOiI2NGY1MWUxM2RlZjk2ZWViMjY1NTdlMjMiLCJyb2xlIjpbImFkbWluIl0sImlhdCI6MTY5Mzc4NTYzMywiZXhwIjoxNjkzODcyMDMzfQ.OODnY90Uxd33WewqPLImucOm3r1O9NDaLH_mpFH4i7s ---admin
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNva2FAc29rYSIsIl9pZCI6IjY0ZjUyMTJjOWI0MTgwOGU3ZTFjYmRmNiIsInJvbGUiOlsicHJlbWl1bSJdLCJpYXQiOjE2OTM3ODY0MTcsImV4cCI6MTY5Mzg3MjgxN30.QJyly6FuE_AyXWx4OrbkA94arfKGaArUwvDG58nI4LE ---premium
 
 ###
 
-POST http://localhost:8080/api/carts/cart
+POST http://localhost:8080/api/carts/64f3d404f8b8aec83e14f73c/products/644f5532685071d9fee258cb
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/api/carts/carts
 Content-Type: application/json
 
 {
@@ -51,8 +71,9 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:8080/api/carts/64e8ebcc18664163245087aa
+PUT http://localhost:8080/api/carts/64f3d404f8b8aec83e14f73c
 Content-Type: application/json
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoic2FuIHNhbiIsImVtYWlsIjoic2FuQHNhbiIsInJvbGUiOiJwcmVtaXVtIiwiaWF0IjoxNjkzNjI5NTY3LCJleHAiOjE2OTM3MTU5Njd9.SCzjO1HtyT_mgsrathtvw70bSpmu2Lkmu0Ie7SYhzOc
 
 {
     "products": 
@@ -69,25 +90,26 @@ DELETE http://localhost:8080/api/carts/6444c09576defc54cd0a9ef2
 
 ###
 
-POST http://localhost:8080/session/login HTTP/1.1
+POST http://localhost:8080/api/session/login HTTP/1.1
 Content-Type: application/json
 
 {
-    "email": "rex@rex",
-    "password": "rex"
+    "email": "soka@soka",
+    "password": "soka"
 }
 
 ###
 
-POST http://localhost:8080/session/register
+POST http://localhost:8080/api/session/register
 Content-Type: application/json
 
 {
-    "username": "rex",
-    "first_name": "rex",
-    "last_name": "rex",
-    "password": "rex",
-    "email": "rex@rex"
+    "username": "soka",
+    "first_name": "soka",
+    "last_name": "soka",
+    "role": "premium",
+    "password": "soka",
+    "email": "soka@soka"
 }
 
 ###
@@ -95,6 +117,7 @@ POST http://localhost:8080/api/users
 Content-Type: application/json
 
 {
+    "username": "bode",
     "first_name": "bode",
     "last_name": "akuna",
     "email": "kat@cal",
@@ -104,12 +127,13 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/users
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImNhbCIsImVtYWlsIjoiY2FsQGJvZGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY4OTYyMDAzNCwiZXhwIjoxNjg5NzA2NDM0fQ.dydJTfG6IoFIgdrZvy839ifxGeVomV5HTmpPEjjpByA
+Authorization: Bearer yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY5Mzc3OTc3NiwiZXhwIjoxNjkzODY2MTc2fQ.qBzt7MGCLehd-4xpPk9HegC260_DiPorqWUDAXWUWiM
 
 ###
 GET http://localhost:8080/pruebas/current
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJleEByZXgiLCJwYXNzd29yZCI6InJleCIsImlhdCI6MTY4Njc3NTg2NSwiZXhwIjoxNjg2ODYyMjY1fQ.YX2MTYYhSwkVz8qmKTn8gg44Nex5dwf6gvWpLwxudgI
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiZGF2IGRhdiIsImVtYWlsIjoiZGF2QGRhdiIsInJvbGUiOiJwdWJsaWMiLCJpYXQiOjE2OTM2ODY1MzQsImV4cCI6MTY5Mzc3MjkzNH0.orRYXg5cQhF3wTtxtbVTOpGFBwTCRbcBbpavLIXzrXk
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiYWwgYWwiLCJlbWFpbCI6ImFsQGFsIiwicm9sZSI6InVzZXIiLCJpYXQiOjE2OTM2ODY1ODQsImV4cCI6MTY5Mzc3Mjk4NH0.mpbyShzugJ8B24vAxKBPpygzsma5BlLxnhb-y9_HhZM
 
 ###
 GET http://localhost:8080/api/ordenes

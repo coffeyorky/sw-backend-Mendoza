@@ -17,7 +17,6 @@ const cookieExtractor = req => {
 };
 
 const initializePassport = () => {
-
   passport.use(
     "jwt",
     new JWTStrategy(
@@ -101,7 +100,7 @@ const initializePassport = () => {
      new GitHudStrategy({
        clientID: "Iv1.1d03719415bb11c8",
        clientSecret: "653442fecb2cb5c6d6b78f8b72a12944badf472f",
-       callbackURL: "http://localhost:8080/session/githubcallback",
+       callbackURL: "http://localhost:8080/api/session/githubcallback",
        scope: ["user:email"] ,
      },
      async (token, refreshToken, profile, done) => {

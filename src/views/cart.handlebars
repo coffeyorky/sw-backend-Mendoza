@@ -1,0 +1,22 @@
+{{#if noProducts}}
+    <h3 style="text-align: center">No hay productos agregados al carrito</h3>
+    {{else}}
+    <div>
+        <h2>Carrito:</h2>
+        {{#each newCart}}
+        <div class="cartIndividual">
+            {{each this.productos}}
+                <div class="divProduct">
+                    <h3>{{this._id.title}}</h3>
+                    <div>
+                        <p>${{this._id-price}}</p>
+                        <p>Cantidad: {{this.quantity}}</p>
+                    </div>
+                    <a href="/api/carts/delete/{{this._id._id}}">Eliminar</a>
+                </div>
+            {{/each}}    
+        </div>
+      {{/each}}  
+      <a href="/api/carts/purchase">Realizar compra</a>
+    </div>
+    {{/if}}

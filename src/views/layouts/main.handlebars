@@ -1,11 +1,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{title}}</title>
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="stylesheet" href="/virtual/css/style.css" />
+    <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.18/dist/sweetalert2.min.css " rel="stylesheet">
+    <link rel="stylesheet" href="/virtual/css/style.css"/>
     <script
       src="https://kit.fontawesome.com/8b0d68f728.js"
       crossorigin="anonymous"
@@ -19,11 +19,12 @@
         <a href="/api/producto">Productos</a>
         <a href="/api/users">Usuarios</a>
         <a href="/api/carts">Cart</a>
-        <a href="/session">Login</a>
-        <a href="/session/register">Register</a>
-        <a href="/session/logout">Logout</a>
+        <a href="/api/session/login">Login</a>
+        <a href="/api/session/register">Register</a>
+        <a href="/chat">Chat</a>
+        <a href="/api/session/logout">Logout</a>
         <div class="cart">
-          <a href=""><i class="fa-solid fa-cart-shopping"></i></a>
+          <a href="/api/carts"><i class="fa-solid fa-cart-shopping"></i></a>
         </div>
       </ul>
     </div>

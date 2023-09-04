@@ -1,29 +1,79 @@
-// const { logger } = require("../../utils/logger")
+const socketClient=io()
 
-// logger.info("estamos aca")
 
-// const form = document.querySelector("#product")
-// form.addEventListener("submit", (e) =>{
-//     e.preventDefault()
+socketClient.on("enviodeproducts",(obj)=>{
+    updateProductList(obj)
+})
 
-//     const data = new FormData(form)
-//     logger.info(data)
-//     const obj = {}
-//     data.forEach((value, key) => obj[key] = value)
 
-//     fetch("http://localhost:8080/api/producto", {
-//         method: "GET",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(obj)
-//     })
-//     .then(respuesta => {
-//         return respuesta.json()
-//     })
-//     .then(respuesta => {
-//         logger.info(respuesta.token)
-//         localStorage.setItem("token", respuesta.token)
+function updateProductList(products) {
+    let div = document.getElementById("list-products");
+    let productos = "";
+  
+    products.forEach((product) => {
+      productos += `
+          <article class="container">
+        <div class="card">
+          <div class="imgBx">
+            <img src="${product.thumbnail}" width="150" />
+          </div>
+          <div class="contentBx">
+            <h2>${product.title}</h2>
+            <div class="size">
+              <h3>${product.description}</h3>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>
+              <span>10</span>
+            </div>
+            <div class="color">
+              <h3>${product.price}</h3>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <a href="#">Buy Now</a>
+          </div>
+        </div>
         
-//     })
-// })
+      </article>
+          
+          `;
+    });
+  
+    div.innerHTML = productos;
+  }
+
+
+  let form = document.getElementById("formProduct");
+form.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+
+  let title = form.elements.title.value;
+  let description = form.elements.description.value;
+  let stock = form.elements.stock.value;
+  let thumbnail = form.elements.thumbnail.value;
+  let category = form.elements.category.value;
+  let price = form.elements.price.value;
+  let code = form.elements.code.value;
+
+  socketClient.emit("addProduct", {
+    title,
+    description,
+    stock,
+    thumbnail,
+    category,
+    price,
+    code,
+  });
+
+  form.reset();
+});
+
+document.getElementById("delete-btn").addEventListener("click", function () {
+    const deleteidinput = document.getElementById("id-prod");
+    const deleteid = deleteidinput.value;
+    console.log(deleteid)
+    socketClient.emit("deleteProduct", deleteid);
+    deleteidinput.value = "";
+  });

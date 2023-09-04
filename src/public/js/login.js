@@ -1,4 +1,4 @@
-const { logger } = require("../../utils/logger")
+const {logger} = require("../../config/logger.config")
 
 logger.info("estamos aca")
 
@@ -11,7 +11,7 @@ form.addEventListener("submit", (e) =>{
     const obj = {}
     data.forEach((value, key) => obj[key] = value)
 
-    fetch("http://localhost:8080/session/login", {
+    fetch("http://localhost:8080/api/session/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

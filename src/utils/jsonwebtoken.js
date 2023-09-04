@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
-const { logger } = require("./logger");
+const { logger } = require("../config/logger.config");
+
 
 const PRIVATE_KEY = 'CoderS3cR3t@';
 

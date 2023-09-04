@@ -4,28 +4,19 @@ const UserDaoMongo = require("../dao/mongo/products.mongo");
 const CustomeError = require("../utils/errors/CustomError");
 const EErrors = require("../utils/errors/EErrors");
 const { generateUserErrorInfo } = require("../utils/errors/info");
-const { logger } = require("../utils/logger");
+const { logger } = require("../config/logger.config");
 const { sendMail } = require("../utils/sendMail");
+const { createHash } = require("../utils/brcyptPass");
 
 const users = [];
 
 class UserController {
   getUsers = async (req, res) => {
     try {
-      // const { page = 1, limit = 10 } = req.query;
-      // const { docs, hasPrevPage, prevPage, hasNextPage, nextPage } =
-      //   await usersService.getUsers({ page, limit });
       const users = await usersService.get();
       if (!users) {
         return res.status(400).send("No hay usuarios");
       }
-        //  res.status(200).render({
-        //    users: docs,
-        //    hasPrevPage,
-        //    prevPage,
-        //    hasNextPage,
-        //    nextPage,
-        //  });
         res.status(200).send({
             status: "success", 
             payload: users
@@ -46,18 +37,20 @@ class UserController {
   };
 
   getUser = async (req, res) => {
-    const { id } = req.params;
-    res.status(200).send(id);
+    const userId = req.params.uid
+    const user = await usersService.getById(userId)
+    if(!user) return res.status(404).send({status:"error", error: "User not found"})
+    res.send({status: "success", payload: user });
   };
 
   createUser = async (req, res, next) => {
     try {
-      let { username, first_name, last_name, password, email} = req.body;
+      const { username, first_name, last_name, password, email} = req.body;
       const newUser = {
         username: username,
         first_name: first_name,
         last_name: last_name,
-        password,
+        password: await createHash(password),
         email: email
       }
       if (!first_name || !last_name || !email) {
@@ -70,8 +63,6 @@ class UserController {
       }
 
       let result = await usersService.createUser(newUser)
-      //let userAgregado = users.push({ first_name, last_name, email });
-
       res.status(201).send({
         status: "success",
         message: "usuario creado",
@@ -91,7 +82,7 @@ class UserController {
       ) {
         return response
           .status(400)
-          .send({ message: "Che pasar todos los datos" });
+          .send({ message: "Pasar todos los datos" });
       }
       let result = await usersService.updateUser(uid, userToReplace);
       response.status(201).send({
@@ -106,9 +97,7 @@ class UserController {
   deleteUser = async (req, res) => {
     try {
       const { uid } = req.params;
-
       let result = await usersService.deletUser(uid);
-
       res.status(200).send({ message: "Usuario borrado", result });
     } catch (error) {
       req.logger.error(error);

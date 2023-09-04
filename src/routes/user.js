@@ -5,7 +5,6 @@ class UserRouter extends ClassRouter {
         this.get("/", ["PUBLIC"], (req, res)=> {
             res.sendSuccess("hola coder")
         })
-
     }
 }
 

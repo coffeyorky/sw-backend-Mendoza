@@ -1,5 +1,5 @@
+const { logger } = require("../../config/logger.config");
 const { EErrors } = require("../../utils/errors/EErrors");
-const { logger } = require("../../utils/logger");
 
 module.exports = (error, req, res, next) => {
     logger.info(error.causa)

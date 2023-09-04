@@ -1,5 +1,5 @@
 const userModel = require("./models/user.model");
-const { logger } = require("../utils/logger");
+const { logger } = require("../config/logger.config");
 
 class UserDaoMongo {
   //  get = async ({page, limit, query=""}) =>  {

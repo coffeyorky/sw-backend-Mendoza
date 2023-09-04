@@ -1,5 +1,6 @@
  const { orderService } = require("../service")
-const { logger } = require("../utils/logger")
+ const { logger } = require("../config/logger.config");
+
 
  class OrderController{
      async getOrders(req, res){
